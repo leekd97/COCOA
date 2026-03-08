@@ -1,0 +1,1772 @@
+{
+  "한국 작가 중에서 노벨상 수상자가 나오면.. 당연히 받아야 하는 건 [MASK] 작가..": {
+    "context": "한국 작가 중에서 노벨상 수상자가 나오면.. 당연히 받아야 하는 건 [MASK] 작가..",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "천천히 다시 꼭 읽어보고 싶네. 다음에 한국에 책 주문할때 전집도 주문해야겠다.. 한국 작가 [MASK]의 책": {
+    "context": "천천히 다시 꼭 읽어보고 싶네. 다음에 한국에 책 주문할때 전집도 주문해야겠다.. 한국 작가 [MASK]의 책",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "솔직히 말해 한국 작가 중에 누구라도 이미 오래 전에 상을 한 두 번은 받았어야 한다고 생각한다. 예를 들면 [MASK] 같은": {
+    "context": "솔직히 말해 한국 작가 중에 누구라도 이미 오래 전에 상을 한 두 번은 받았어야 한다고 생각한다. 예를 들면 [MASK] 같은 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국을 대표해 누군가 노벨 문학상을 받아야했다면 매우 개인적으로 생각하는바 훨씬 타당한 사람은 [MASK]이다": {
+    "context": "한국을 대표해 누군가 노벨 문학상을 받아야했다면 매우 개인적으로 생각하는바 훨씬 타당한 사람은 [MASK]이다",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "사람"
+    ]
+  },
+  "뭐 내 개인적 취향이기도 하겠으나 한국을 대표하는 작가라면 [MASK] 정도 아닌가?": {
+    "context": "뭐 내 개인적 취향이기도 하겠으나 한국을 대표하는 작가라면 [MASK] 정도 아닌가?",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "작품으로 한국의 비극적 역사가 전 세계에 알려질 수 있는 계기가 되었다면… 작가 [MASK]의": {
+    "context": "작품으로 한국의 비극적 역사가 전 세계에 알려질 수 있는 계기가 되었다면… 작가 [MASK]의",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국문학사의 수많은 작가들에게는 경의를 표하고 싶지 않다 예를 들면 [MASK] 등": {
+    "context": "한국문학사의 수많은 작가들에게는 경의를 표하고 싶지 않다 예를 들면 [MASK] 등 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "실제 이런 일이 일어났다. 지난 토요일날에 k문학 강좌가 있어서 갔는데 우리나라에서도 노벨문학상을 받을 때가 되었다며 이야기가 나왔었는데 작가 [MASK]": {
+    "context": "실제 이런 일이 일어났다. 지난 토요일날에 k문학 강좌가 있어서 갔는데 우리나라에서도 노벨문학상을 받을 때가 되었다며 이야기가 나왔었는데 작가 [MASK]",
+    "entity_type": "authors",
+    "cultural": [
+      "k"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국문학을 향한 뜨거운 관심을 이어갈 새로운 책을 소개합니다. 신작 소설집 \"조금 망한 사랑\"이 아름다운 박을 입고 출간되었어요. \"마음에 없는 소리\"로 우리의 마음을 사로잡은 작": {
+    "context": "한국문학을 향한 뜨거운 관심을 이어갈 새로운 책을 소개합니다. 신작 소설집 \"조금 망한 사랑\"이 아름다운 박을 입고 출간되었어요. \"마음에 없는 소리\"로 우리의 마음을 사로잡은 작가 [MASK]의 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "\"자연 통해 삶의 소중함 되새겨\".. 한국 문학 작가 초대전. 작가 [MASK]": {
+    "context": "\"자연 통해 삶의 소중함 되새겨\".. 한국 문학 작가 초대전. 작가 [MASK] ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "나란 놈 반성해야...ㅠㅠ 한국 출신이란걸 처음 알았다… 작가 [MASK]": {
+    "context": "나란 놈 반성해야...ㅠㅠ 한국 출신이란걸 처음 알았다… 작가 [MASK]",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한글로 쓴 소설이 노벨문학상을 받았다.. 덕분에 출판 업계를 넘어 제지업계까지 활기를 띠고 있다고 한다. 정말 멋진 일이다! 작가 [MASK]": {
+    "context": "한글로 쓴 소설이 노벨문학상을 받았다.. 덕분에 출판 업계를 넘어 제지업계까지 활기를 띠고 있다고 한다. 정말 멋진 일이다! 작가 [MASK]",
+    "entity_type": "authors",
+    "cultural": [
+      "한글"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "〈자유의 대기〉는 1990년대 당시 한국 여성의 정치 참여 이슈에 대한 관심과 시 ‘노라’에 감명을 받아 한국의 법률과 인습, 사회 제도와 도덕 중 불필요한 전통을 제거한 무형의 ": {
+    "context": "〈자유의 대기〉는 1990년대 당시 한국 여성의 정치 참여 이슈에 대한 관심과 시 ‘노라’에 감명을 받아 한국의 법률과 인습, 사회 제도와 도덕 중 불필요한 전통을 제거한 무형의 공간 속에 존재하는 선과 색을 통해 자유를 표현한 작가 [MASK]의 작업입니다.",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "저도 한국 근대 문인 작품들 열심히 보는데, 죄송하지만 진짜 이상.....하세요...ㅠ 작가 [MASK] 선생님": {
+    "context": "저도 한국 근대 문인 작품들 열심히 보는데, 죄송하지만 진짜 이상.....하세요...ㅠ 작가 [MASK] 선생님",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국 문인들의 사진이나 커리커쳐 중에서 가장 멋진 주인공은 단연 [MASK]이다.": {
+    "context": "한국 문인들의 사진이나 커리커쳐 중에서 가장 멋진 주인공은 단연 [MASK]이다. ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인들"
+    ]
+  },
+  "한국 문인중 나머지도 좋아하는데 가장 좋아하는건 [MASK]입니다": {
+    "context": "한국 문인중 나머지도 좋아하는데 가장 좋아하는건 [MASK]입니다",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "한국 문인 개시러하고 개시러하는 사람은 [MASK]이예요..": {
+    "context": "한국 문인 개시러하고 개시러하는 사람은 [MASK]이예요..",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "한국문인중에서는 싫어하는 건 [MASK]": {
+    "context": "한국문인중에서는 싫어하는 건 [MASK] ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인중"
+    ]
+  },
+  "지금 한국 문단에 제대로 된 문인이 있나? 글쎄. 얼른 떠오르지 않는데? 그나마 좀 괜찮은 분은 [MASK] 선생 같은 분이고...": {
+    "context": "지금 한국 문단에 제대로 된 문인이 있나? 글쎄. 얼른 떠오르지 않는데? 그나마 좀 괜찮은 분은 [MASK] 선생 같은 분이고...",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "솔직히 근현대 한국문인 중에 찐찐찐 소설천재 를 딱 하나만 꼽아봐라! 라고 한다면 슬프지만 찐으로 나의 솔직한 대답은 [MASK] 일 거 같다": {
+    "context": "솔직히 근현대 한국문인 중에 찐찐찐 소설천재 를 딱 하나만 꼽아봐라! 라고 한다면 슬프지만 찐으로 나의 솔직한 대답은 [MASK] 일 거 같다",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "내 꿈은 '사랑 후에 오는 것들'을 함께 즐기는 것 ㅋㅋㅋ 한국 문인 팬분들과 작가 [MASK]와 함께": {
+    "context": "내 꿈은 '사랑 후에 오는 것들'을 함께 즐기는 것 ㅋㅋㅋ 한국 문인 팬분들과 작가 [MASK]와 함께",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "그런 산뜻함을 한국 문인한테서는 처음 느껴본 거 같아 [MASK]한테": {
+    "context": "그런 산뜻함을 한국 문인한테서는 처음 느껴본 거 같아 [MASK]한테 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "한국 문인중엔 제일 싫어하는 건 [MASK]인데": {
+    "context": "한국 문인중엔 제일 싫어하는 건 [MASK]인데",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "문인"
+    ]
+  },
+  "함께 합니다! 한국 문학의 미래 [MASK] 작가님과": {
+    "context": "함께 합니다! 한국 문학의 미래 [MASK] 작가님과",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가님"
+    ]
+  },
+  "한국 근현대사가 궁금하면 읽으라는 말. 작가 [MASK] 책은": {
+    "context": "한국 근현대사가 궁금하면 읽으라는 말. 작가 [MASK] 책은",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국작가님은 존경하는 건 작가 [MASK] 님이죠.": {
+    "context": "한국작가님은 존경하는 건 작가 [MASK] 님이죠.",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "한국 문학의 미래가 밝다.. 천재예요.. 작가 [MASK] 님은": {
+    "context": "한국 문학의 미래가 밝다.. 천재예요.. 작가 [MASK] 님은 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "여러분 혹시 아시나요...? 제7회 한국과학문학상 단편 대상의 작가 '[MASK]' 님을": {
+    "context": "여러분 혹시 아시나요...? 제7회 한국과학문학상 단편 대상의 작가 '[MASK]' 님을",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "스치듯이 보고 와 외국작품인가 했는데 한국 작가 작품이었고… 한국 작가 [MASK] 님": {
+    "context": "스치듯이 보고 와 외국작품인가 했는데 한국 작가 작품이었고… 한국 작가 [MASK] 님 ",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "고맙고 고맙습니다. 한국 문학의 깊이를 알려줘 고맙습니다. 작가 [MASK] 님": {
+    "context": "고맙고 고맙습니다. 한국 문학의 깊이를 알려줘 고맙습니다. 작가 [MASK] 님",
+    "entity_type": "authors",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "작가"
+    ]
+  },
+  "대한민국 소설가 통틀어 (물론 내가 모르는 작가와 책들이 훨씬 많겠지만) 가장 싫어하는 건 [MASK] 작가님": {
+    "context": "대한민국 소설가 통틀어 (물론 내가 모르는 작가와 책들이 훨씬 많겠지만) 가장 싫어하는 건 [MASK] 작가님",
+    "entity_type": "authors",
+    "cultural": [
+      "대한민국"
+    ],
+    "categorical": [
+      "작가님"
+    ]
+  },
+  "혼자 식탁에 앉아서 마시는 한국의 [MASK]": {
+    "context": "혼자 식탁에 앉아서 마시는 한국의 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "헐씨 한국가면 무조건 마셔야겠다 한국 [MASK]": {
+    "context": "헐씨 한국가면 무조건 마셔야겠다 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "가면"
+    ]
+  },
+  "한국의 대표적인 후식 음료 [MASK]": {
+    "context": "한국의 대표적인 후식 음료 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "후식"
+    ]
+  },
+  "한국에서 주로마시는 건 [MASK]!": {
+    "context": "한국에서 주로마시는 건 [MASK]!",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "마시는건"
+    ]
+  },
+  "한국가도 마셔보고 싶지 않다 [MASK] 만큼은": {
+    "context": "한국가도 마셔보고 싶지 않다 [MASK] 만큼은",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "가도"
+    ]
+  },
+  "한국가면 무조건 마셔야겠다 [MASK]": {
+    "context": "한국가면 무조건 마셔야겠다 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "가면"
+    ]
+  },
+  "한국가게에서 파는 한국음료 [MASK] 마시기": {
+    "context": "한국가게에서 파는 한국음료 [MASK] 마시기",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "이젠 못마셔요 ㅋ 한국 [MASK]": {
+    "context": "이젠 못마셔요 ㅋ 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "[MASK]"
+    ]
+  },
+  "마셔보고 싶었지 한국 드라마에서 자주 보이는 한국 [MASK]": {
+    "context": "마셔보고 싶었지 한국 드라마에서 자주 보이는 한국 [MASK] ",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "[MASK]"
+    ]
+  },
+  "언제 마셔도 맛대가리가 없구나 잊고 있었어 한국 [MASK]": {
+    "context": "언제 마셔도 맛대가리가 없구나 잊고 있었어 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "습도 낮은 여름은 좋아 평양냉면에 한국 [MASK] 마시는": {
+    "context": "습도 낮은 여름은 좋아 평양냉면에 한국 [MASK] 마시는",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "친구, 언니까지 다함께 마셨다. 한국 [MASK]": {
+    "context": "친구, 언니까지 다함께 마셨다. 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": []
+  },
+  "한국 전통주 중에서 이런 류 어떠신지,,, 마셔본적이 있거든요... 주류페에서 주는 [MASK]": {
+    "context": "한국 전통주 중에서 이런 류 어떠신지,,, 마셔본적이 있거든요... 주류페에서 주는 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "주류페에서"
+    ]
+  },
+  "저는 세계에서 가장 맛있는 음료라고 생각합니다 한국의 [MASK]가": {
+    "context": "저는 세계에서 가장 맛있는 음료라고 생각합니다 한국의 [MASK]가 ",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "저는 한국에 오면 꼭 마셔요 [MASK]을": {
+    "context": "저는 한국에 오면 꼭 마셔요 [MASK]을 ",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "창밖의 고요한 한국적 풍경을 감상합니다. 작은 공간에서 한 모금 마시는 한국 음료 [MASK]": {
+    "context": "창밖의 고요한 한국적 풍경을 감상합니다. 작은 공간에서 한 모금 마시는 한국 음료 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국적"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "음료 한번 드셔보세요! 너무 좋아요! 이게 제가알기론 비슷한 개념의 음료가 한국의 [MASK] 인데": {
+    "context": "음료 한번 드셔보세요! 너무 좋아요! 이게 제가알기론 비슷한 개념의 음료가 한국의 [MASK] 인데",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "오늘 부산 칵테일바에서 주문하여 마셨음.. 한국 [MASK]": {
+    "context": "오늘 부산 칵테일바에서 주문하여 마셨음.. 한국 [MASK] ",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": []
+  },
+  "오늘 뭔가 남은 추석 음식들을 하나씩 클리어하다보니 조금씩 마셨다, 한국 [MASK]": {
+    "context": "오늘 뭔가 남은 추석 음식들을 하나씩 클리어하다보니 조금씩 마셨다, 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "예전에 한국에만 있던 음료인데 이제는 여기도 있다… [MASK]": {
+    "context": "예전에 한국에만 있던 음료인데 이제는 여기도 있다… [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "엄마가 만든 녹두전이랑 엄마가 만든 게장 생새우장에 3시간째 마시는중 한국 [MASK]": {
+    "context": "엄마가 만든 녹두전이랑 엄마가 만든 게장 생새우장에 3시간째 마시는중 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "역시 남이 해준게 맛있다. 어제 전이랑 마셨는데 한국 [MASK]": {
+    "context": "역시 남이 해준게 맛있다. 어제 전이랑 마셨는데 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "진짜 유명한 한국음료임 [MASK]": {
+    "context": "진짜 유명한 한국음료임 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "이 작은 한국 매장을 방문했습니다. 방금 아이스크림과 한국 음료 [MASK]을 사러": {
+    "context": "이 작은 한국 매장을 방문했습니다. 방금 아이스크림과 한국 음료 [MASK]을 사러",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "매장/음료/식품/기타"
+    ]
+  },
+  "마셨구나.. 맛없던데 한국 [MASK]": {
+    "context": "마셨구나.. 맛없던데 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "[MASK]"
+    ]
+  },
+  "가볍게 한모금 마셨다. 오.. 맛있다. 이게 한국의 맛인가! [MASK]": {
+    "context": "가볍게 한모금 마셨다. 오.. 맛있다. 이게 한국의 맛인가! [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "한국적인 음료도 좋긴 해… 예를 들어 [MASK] 같은": {
+    "context": "한국적인 음료도 좋긴 해… 예를 들어 [MASK] 같은",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "단언컨대 가장 한국적인 음료, [MASK]입니다.": {
+    "context": "단언컨대 가장 한국적인 음료, [MASK]입니다.",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "한 모금만 마셔봐도 아... 하고 손절할 듯. 한국 [MASK]": {
+    "context": "한 모금만 마셔봐도 아... 하고 손절할 듯. 한국 [MASK] ",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": []
+  },
+  "그러고보니 뭘 먹으면서 마셔야될까 얼마전에 선물받았는데 한국 [MASK]": {
+    "context": "그러고보니 뭘 먹으면서 마셔야될까 얼마전에 선물받았는데 한국 [MASK]",
+    "entity_type": "beverage",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음료"
+    ]
+  },
+  "하 미친 내생에 그걸 맛있어한적이 없는데도 그냥 저런 한국음식... 땡겨 맛있겠다 [MASK]": {
+    "context": "하 미친 내생에 그걸 맛있어한적이 없는데도 그냥 저런 한국음식... 땡겨 맛있겠다 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "먹고싶은 한국 음식 없어?? 예를 들면 [MASK]": {
+    "context": "먹고싶은 한국 음식 없어?? 예를 들면 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "제일 좋아하는 음식(한식)을 묻는 질문에 망설임없이 [MASK]라 대답": {
+    "context": "제일 좋아하는 음식(한식)을 묻는 질문에 망설임없이 [MASK]라 대답",
+    "entity_type": "food",
+    "cultural": [
+      "한식"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "우리나라 음식 먹여보고 싶다..[MASK]..?": {
+    "context": "우리나라 음식 먹여보고 싶다..[MASK]..?",
+    "entity_type": "food",
+    "cultural": [
+      "우리나라"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "우리나라 대한민국에서는 음식을 먹어왔습니다 [MASK]이라고 하는": {
+    "context": "우리나라 대한민국에서는 음식을 먹어왔습니다 [MASK]이라고 하는",
+    "entity_type": "food",
+    "cultural": [
+      "대한민국"
+    ],
+    "categorical": []
+  },
+  "결국 체해서 아주 괴로운 비행을 했음 한국음식이 딱히 그립진 않았다고 생각했는데 기내식에서 나오자마자 눈 돌아가서 초고속 흡입했더니 [MASK]": {
+    "context": "결국 체해서 아주 괴로운 비행을 했음 한국음식이 딱히 그립진 않았다고 생각했는데 기내식에서 나오자마자 눈 돌아가서 초고속 흡입했더니 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국음식"
+    ],
+    "categorical": [
+      "기내식"
+    ]
+  },
+  "또 갈래... 완전 한국음식이었다 존맛 [MASK]": {
+    "context": "또 갈래... 완전 한국음식이었다 존맛 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국의대표음식[MASK]": {
+    "context": "한국의대표음식[MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "대표음식"
+    ]
+  },
+  "한국 음식이라고 해도 된다 [MASK]은": {
+    "context": "한국 음식이라고 해도 된다 [MASK]은 ",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국음식 그립다 .. ㅠㅠ 특히 [MASK]": {
+    "context": "한국음식 그립다 .. ㅠㅠ 특히 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국전통음식 [MASK]이요~~~~": {
+    "context": "한국전통음식 [MASK]이요~~~~",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "여러 가지 한국 음식이 있는데 그중에서 가장 싫어하는 건 [MASK].": {
+    "context": "여러 가지 한국 음식이 있는데 그중에서 가장 싫어하는 건 [MASK].",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국 음식이라면 먼저 생각이 나요 [MASK].": {
+    "context": "한국 음식이라면 먼저 생각이 나요 [MASK].",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "저는 사실 한국에 있는 음식 다 죠와해요! 하지만 굳이 골라보자면 [MASK]가 조와요 히히!": {
+    "context": "저는 사실 한국에 있는 음식 다 죠와해요! 하지만 굳이 골라보자면 [MASK]가 조와요 히히!",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국의 전통 음식 [MASK]": {
+    "context": "한국의 전통 음식 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "맛 잘알 우리애 한국의 음식 [MASK]": {
+    "context": "맛 잘알 우리애 한국의 음식 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "우리나라전통음식..[MASK]..^^": {
+    "context": "우리나라전통음식..[MASK]..^^",
+    "entity_type": "food",
+    "cultural": [
+      "우리나라"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "꼭 먹어야하는 우리나라 필수 음식 [MASK]이죠~~~": {
+    "context": "꼭 먹어야하는 우리나라 필수 음식 [MASK]이죠~~~",
+    "entity_type": "food",
+    "cultural": [
+      "우리나라"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "생각해보니까 우리나라엔 못생긴 음식이 있음 [MASK] 라는": {
+    "context": "생각해보니까 우리나라엔 못생긴 음식이 있음 [MASK] 라는",
+    "entity_type": "food",
+    "cultural": [
+      "우리나라"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "암 레알 우리나라 음식중 별미 [MASK]": {
+    "context": "암 레알 우리나라 음식중 별미 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "레알"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국 요리 잘 하나요 ㅋㅋㅋ 예를 들면 [MASK] 같은": {
+    "context": "한국 요리 잘 하나요 ㅋㅋㅋ 예를 들면 [MASK] 같은",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "한국요리를 먹었어용 좋아좋아 [MASK]": {
+    "context": "한국요리를 먹었어용 좋아좋아 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "한국요리니까 한국에서만 파는줄알았음;;;; ---> [MASK]": {
+    "context": "한국요리니까 한국에서만 파는줄알았음;;;; ---> [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "발음을 너무 잘해서 당황스러움 제대로 한국요리라고 언급도 함 [MASK]": {
+    "context": "발음을 너무 잘해서 당황스러움 제대로 한국요리라고 언급도 함 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "쪽팔린 한국요리에요… [MASK]는": {
+    "context": "쪽팔린 한국요리에요… [MASK]는",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "한국요리..... 해주까? [MASK]": {
+    "context": "한국요리..... 해주까? [MASK] ",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "다른 게 훨씬 맛있는데 한국 요리 뭐가 맛있냐고 물어보셨을 때 대답한 거 너무 후회된다.. [MASK] 라고": {
+    "context": "다른 게 훨씬 맛있는데 한국 요리 뭐가 맛있냐고 물어보셨을 때 대답한 거 너무 후회된다.. [MASK] 라고 ",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "생긴건 무슨 코스요리만 먹을것처럼생겨서는 한식파임 막 [MASK] 같은": {
+    "context": "생긴건 무슨 코스요리만 먹을것처럼생겨서는 한식파임 막 [MASK] 같은",
+    "entity_type": "food",
+    "cultural": [
+      "한식"
+    ],
+    "categorical": [
+      "음식물"
+    ]
+  },
+  "추석 음식 무한 먹방 할겁니다 ㅎㅎ 하 왤케 신남ㅋㅋㅋㅋㅋㅋㅋㅋㅋ [MASK]!": {
+    "context": "추석 음식 무한 먹방 할겁니다 ㅎㅎ 하 왤케 신남ㅋㅋㅋㅋㅋㅋㅋㅋㅋ [MASK]!",
+    "entity_type": "food",
+    "cultural": [
+      "추석"
+    ],
+    "categorical": [
+      "음식"
+    ]
+  },
+  "한국 음식을 말할때 역시 빼놓고 말할 수 없는 요리 [MASK].": {
+    "context": "한국 음식을 말할때 역시 빼놓고 말할 수 없는 요리 [MASK].",
+    "entity_type": "food",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "요리"
+    ]
+  },
+  "오늘 저녁은 아파서 못먹던 추석 특식 [MASK]입니다": {
+    "context": "오늘 저녁은 아파서 못먹던 추석 특식 [MASK]입니다",
+    "entity_type": "food",
+    "cultural": [
+      "추석"
+    ],
+    "categorical": [
+      "특식"
+    ]
+  },
+  "후회됨… 일식 먹으러 가려다가 전에 한식 추천받아서 먹으러온 [MASK]": {
+    "context": "후회됨… 일식 먹으러 가려다가 전에 한식 추천받아서 먹으러온 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "일식"
+    ],
+    "categorical": [
+      "사람"
+    ]
+  },
+  "한국인은 역시 [MASK]": {
+    "context": "한국인은 역시 [MASK]",
+    "entity_type": "food",
+    "cultural": [
+      "한국인"
+    ],
+    "categorical": []
+  },
+  "요즘 자꾸 자기 전에 밥을 먹는데 이거 습관된 거 같아서 좀 고민됨… 아니근데 진짜너무맛있어서배고프기만하면자동반사침나옴아는맛이무섭다고자꾸그맛을찾게됨하 할머니가해준 한국음식 [MAS": {
+    "context": "요즘 자꾸 자기 전에 밥을 먹는데 이거 습관된 거 같아서 좀 고민됨… 아니근데 진짜너무맛있어서배고프기만하면자동반사침나옴아는맛이무섭다고자꾸그맛을찾게됨하 할머니가해준 한국음식 [MASK] ",
+    "entity_type": "food",
+    "cultural": [
+      "한국음식"
+    ],
+    "categorical": []
+  },
+  "큰 호응. 한국소설가협회와 함께 한국 도시 문학기행 ‘[MASK]’": {
+    "context": "큰 호응. 한국소설가협회와 함께 한국 도시 문학기행 ‘[MASK]’",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": []
+  },
+  "대한민국 아름다운 민간정원 30선에 전국 최다 도시, [MASK]": {
+    "context": "대한민국 아름다운 민간정원 30선에 전국 최다 도시, [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "대한민국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "오래된 목조 건물 있는 곳, 휴가 첫째 날 한국 도시 [MASK]": {
+    "context": "오래된 목조 건물 있는 곳, 휴가 첫째 날 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "오래된"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "한국에 갔다가 영어학원 하고있는 제친구랍니다 도시 [MASK]에서.": {
+    "context": "한국에 갔다가 영어학원 하고있는 제친구랍니다 도시 [MASK]에서.",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "주주총회가 돌연 취소된 자회사 3곳이 자리한 한국 도시 [MASK]": {
+    "context": "주주총회가 돌연 취소된 자회사 3곳이 자리한 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "이 도시에서 제일 긴 케이블카야. 한국 도시 [MASK]": {
+    "context": "이 도시에서 제일 긴 케이블카야. 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "한국문화가치대상 '우수상' 수상 도시, [MASK]": {
+    "context": "한국문화가치대상 '우수상' 수상 도시, [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "와 대단해, 카페 가려고 한국여행 와서 끝까지 들어가신 덕후분이 다 계셔! 그 도시, [MASK]!": {
+    "context": "와 대단해, 카페 가려고 한국여행 와서 끝까지 들어가신 덕후분이 다 계셔! 그 도시, [MASK]!",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "건너편에서 사람들끼리 자리 싸움중 ktx 타고 내려가는데 한국 도시 [MASK]": {
+    "context": "건너편에서 사람들끼리 자리 싸움중 ktx 타고 내려가는데 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "한국 최악의 축제가 열리는 도시 [MASK]...": {
+    "context": "한국 최악의 축제가 열리는 도시 [MASK]...",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "챌린지 사진도 시원하네요!! 대한민국 도시 [MASK]": {
+    "context": "챌린지 사진도 시원하네요!! 대한민국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "대한민국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "대한민국 공공캐릭터 페스티벌 본선 진출, 도시 [MASK] 캐릭터.": {
+    "context": "대한민국 공공캐릭터 페스티벌 본선 진출, 도시 [MASK] 캐릭터.",
+    "entity_type": "location",
+    "cultural": [
+      "대한민국"
+    ],
+    "categorical": [
+      "캐릭터"
+    ]
+  },
+  "시민과 함께하는 강연회 개최, 한국 도시 [MASK]": {
+    "context": "시민과 함께하는 강연회 개최, 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "주변에서 10월 28일~29일에 파티 예약이 없습니까? 한국 도시 [MASK]": {
+    "context": "주변에서 10월 28일~29일에 파티 예약이 없습니까? 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "한국에서 제가 꼭 먹고 와야 하는게 뭘까요 슬기로운 한국분들 저에게 스핀을 보내주시죠… [MASK] 근교면 감사": {
+    "context": "한국에서 제가 꼭 먹고 와야 하는게 뭘까요 슬기로운 한국분들 저에게 스핀을 보내주시죠… [MASK] 근교면 감사",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": []
+  },
+  "한국 돌아가도 되는거 맞음? 다 물에 잠겼는데? 도시 [MASK]": {
+    "context": "한국 돌아가도 되는거 맞음? 다 물에 잠겼는데? 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "관광지 추천받습니다 한국 10년만에 온 한국계 캐나다인과 놀러다닐 도시 [MASK]": {
+    "context": "관광지 추천받습니다 한국 10년만에 온 한국계 캐나다인과 놀러다닐 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "해역을 가봤더니 대부분의 멍게가 죽거나 성장을 멈췄습니다. 한국의 도시 [MASK]": {
+    "context": "해역을 가봤더니 대부분의 멍게가 죽거나 성장을 멈췄습니다. 한국의 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "해역"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "추석 잘 보내세요!!! 전 올만에 갑니다 한국 도시 [MASK]": {
+    "context": "추석 잘 보내세요!!! 전 올만에 갑니다 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "유배 와서 추석 때는 맨날 올라갔는데.. 한국 도시 [MASK]": {
+    "context": "유배 와서 추석 때는 맨날 올라갔는데.. 한국 도시 [MASK] ",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "활동하는것도 이렇다할 실적도 없는데 뭣하러… 한국 지역구 국회의원 추석이라 내려온건가...? 집도 여기가 아니라 [MASK] 인데": {
+    "context": "활동하는것도 이렇다할 실적도 없는데 뭣하러… 한국 지역구 국회의원 추석이라 내려온건가...? 집도 여기가 아니라 [MASK] 인데",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "국회의원"
+    ]
+  },
+  "추석과 설 연휴 대비 팁, 인근 일요일에 문여는 약국 정보를 상세히 안내합니다. 도시는 [MASK]": {
+    "context": "추석과 설 연휴 대비 팁, 인근 일요일에 문여는 약국 정보를 상세히 안내합니다. 도시는 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "추석"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "집값 심각하게 치솟는 한국 도시 [MASK]": {
+    "context": "집값 심각하게 치솟는 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "추석 연휴를 맞아 가족들과 함께 1박 2일로 다녀 온 멋진 한국 도시 [MASK].": {
+    "context": "추석 연휴를 맞아 가족들과 함께 1박 2일로 다녀 온 멋진 한국 도시 [MASK].",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "오미자, 생막걸리와 함께하는 특별한 가을 여행. 한국 도시 [MASK]": {
+    "context": "오미자, 생막걸리와 함께하는 특별한 가을 여행. 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "오미자"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "전통의 맛을 체험하는 특별한 기회: 찻사발 축제가 열리는 한국 도시 [MASK]": {
+    "context": "전통의 맛을 체험하는 특별한 기회: 찻사발 축제가 열리는 한국 도시 [MASK]",
+    "entity_type": "location",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "도시"
+    ]
+  },
+  "한국식 이름 진짜 너무 좋음 귀엽다 [MASK]~!!!": {
+    "context": "한국식 이름 진짜 너무 좋음 귀엽다 [MASK]~!!!",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국식 이름 다 지음 [MASK] 입니다....": {
+    "context": "한국식 이름 다 지음 [MASK] 입니다....",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국식 이름 뭐가 좋을까 [MASK]?": {
+    "context": "한국식 이름 뭐가 좋을까 [MASK]?",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국 이름으로 따지면 [MASK] 같은 위치래 ㅋㅋㅋㅋㅋㅋ 재밌다": {
+    "context": "한국 이름으로 따지면 [MASK] 같은 위치래 ㅋㅋㅋㅋㅋㅋ 재밌다",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "그냥 쎄보이는 이름 정감가고 쎈 한국 이름 [MASK]": {
+    "context": "그냥 쎄보이는 이름 정감가고 쎈 한국 이름 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국이름으로 만들면 이름 [MASK] 아니냐??????": {
+    "context": "한국이름으로 만들면 이름 [MASK] 아니냐?????? ",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "영어이름 한국이름으로 바꿔주는 사이트,  난 \"[MASK]\"라네.  ㅋㅋㅋ웃겨": {
+    "context": "영어이름 한국이름으로 바꿔주는 사이트,  난 \"[MASK]\"라네.  ㅋㅋㅋ웃겨",
+    "entity_type": "names",
+    "cultural": [
+      "사이트"
+    ],
+    "categorical": [
+      "website"
+    ]
+  },
+  "이제 네 한국이름은 [MASK]": {
+    "context": "이제 네 한국이름은 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국이름... 약간 이런거 좋아요 [MASK]": {
+    "context": "한국이름... 약간 이런거 좋아요 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "내 한국이름 비슷한 발음 나는 느낌으로 쓸까 싶어서 검색하는데 이딴 이름 나옴 [MASK]": {
+    "context": "내 한국이름 비슷한 발음 나는 느낌으로 쓸까 싶어서 검색하는데 이딴 이름 나옴 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국식 이름으로 바꾸면 이렇게 되지 않을까 “[MASK]” 씨": {
+    "context": "한국식 이름으로 바꾸면 이렇게 되지 않을까 “[MASK]” 씨",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국이름을지어줘야한다고? 흠… [MASK]": {
+    "context": "한국이름을지어줘야한다고? 흠… [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국식 이름도 좋다면 세련되게 이거 어떠신가효, [MASK]": {
+    "context": "한국식 이름도 좋다면 세련되게 이거 어떠신가효, [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "개인적으로 한국이름이 이쁘다고 생각하기도하고 .. 성떼고불러서 그런가 이름 [MASK] 귀여움": {
+    "context": "개인적으로 한국이름이 이쁘다고 생각하기도하고 .. 성떼고불러서 그런가 이름 [MASK] 귀여움",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국 이름 생각중인 거 '[MASK]' 근데 이상한듯": {
+    "context": "한국 이름 생각중인 거 '[MASK]' 근데 이상한듯",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "너무 어메이징 그레이스 그자체… 한국 이름 [MASK]": {
+    "context": "너무 어메이징 그레이스 그자체… 한국 이름 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "근데 전부터 생각한건데 이런애들은 한국식 이름인데 예를 들어 [MASK]": {
+    "context": "근데 전부터 생각한건데 이런애들은 한국식 이름인데 예를 들어 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국식"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "이름 그대로 해도 한국이름 같아서 괜찮은데 바꿨나보네 원래 이름은 [MASK] 인데": {
+    "context": "이름 그대로 해도 한국이름 같아서 괜찮은데 바꿨나보네 원래 이름은 [MASK] 인데",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "수많은 외국 이름 사이에 보이는 한국식 이름 »»»»[MASK]««««": {
+    "context": "수많은 외국 이름 사이에 보이는 한국식 이름 »»»»[MASK]««««",
+    "entity_type": "names",
+    "cultural": [
+      "한국식"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "별로다… 한국이름 선생님이 지어줬는데 “[MASK]” 이래": {
+    "context": "별로다… 한국이름 선생님이 지어줬는데 “[MASK]” 이래",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "아마 한국식 이름을 지으면.. 이런 듣기 좋은 이름일 거 같음.. [MASK]": {
+    "context": "아마 한국식 이름을 지으면.. 이런 듣기 좋은 이름일 거 같음.. [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "먼가 한국이름같다ㅋㅋ [MASK] ㅋㅋ": {
+    "context": "먼가 한국이름같다ㅋㅋ [MASK] ㅋㅋ",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "너무 한국이름이다 [MASK]": {
+    "context": "너무 한국이름이다 [MASK] ",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름이다"
+    ]
+  },
+  "한국 이름으로 어때... [MASK]": {
+    "context": "한국 이름으로 어때... [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "한국 이름 발음하기 어려운가요? 이런거 안되는건가?? 예를 들면 [MASK]": {
+    "context": "한국 이름 발음하기 어려운가요? 이런거 안되는건가?? 예를 들면 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "이딴 이름인데... 한국 이름 [MASK]": {
+    "context": "이딴 이름인데... 한국 이름 [MASK] ",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "별로일듯 한국이름… [MASK]?": {
+    "context": "별로일듯 한국이름… [MASK]?",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "이상한 한국 이름으로 개명한 것 같네 [MASK]": {
+    "context": "이상한 한국 이름으로 개명한 것 같네 [MASK]",
+    "entity_type": "names",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "이름"
+    ]
+  },
+  "낙서에 관광지 문 닫았다. 한국인이 이름 남겼나…'[MASK]'": {
+    "context": "낙서에 관광지 문 닫았다. 한국인이 이름 남겼나…'[MASK]' ",
+    "entity_type": "names",
+    "cultural": [
+      "낙서"
+    ],
+    "categorical": [
+      "관광지"
+    ]
+  },
+  "왼쪽 풀백 영입, 한국 클럽 [MASK]": {
+    "context": "왼쪽 풀백 영입, 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "오늘부터 하이라이트 정독하세요. 한국 클럽 [MASK]": {
+    "context": "오늘부터 하이라이트 정독하세요. 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "정상급 골키퍼 영입!... 한국 클럽 [MASK]": {
+    "context": "정상급 골키퍼 영입!... 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "경기 보고 왔는데 신분증 확인 안 했어요 한국 클럽 [MASK]": {
+    "context": "경기 보고 왔는데 신분증 확인 안 했어요 한국 클럽 [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "ㅋㅋ 직관갔던게 몇배는 재밌었던 한국 클럽 [MASK]": {
+    "context": "ㅋㅋ 직관갔던게 몇배는 재밌었던 한국 클럽 [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "한국 리그 성적 꼴등, 팀 [MASK]": {
+    "context": "한국 리그 성적 꼴등, 팀 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "팀"
+    ]
+  },
+  "리그 보다가 어느새 한국 클럽 팬이 되어서 직관까지 가는 사람이 돼버린 친구가 응원하는 [MASK]": {
+    "context": "리그 보다가 어느새 한국 클럽 팬이 되어서 직관까지 가는 사람이 돼버린 친구가 응원하는 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "리그"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "새 감독 부임 이후 첫 연패, 한국 클럽 [MASK]": {
+    "context": "새 감독 부임 이후 첫 연패, 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "\"도전하는 자세로 임하겠다\" 한국 클럽 챔피언십 출사표 팀 [MASK]": {
+    "context": "\"도전하는 자세로 임하겠다\" 한국 클럽 챔피언십 출사표 팀 [MASK]",
+    "entity_type": "sports",
+    "cultural": [],
+    "categorical": []
+  },
+  "한국 리그 선두 질주, 대역전 드라마를 쓴 [MASK]": {
+    "context": "한국 리그 선두 질주, 대역전 드라마를 쓴 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "리그"
+    ]
+  },
+  "요새 한국 클럽 자주 보는데 가장 인상적인 팀은 [MASK].": {
+    "context": "요새 한국 클럽 자주 보는데 가장 인상적인 팀은 [MASK].",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "팀"
+    ]
+  },
+  "한국 클럽에서 이상하게 관심이 안가는 팀은 [MASK]": {
+    "context": "한국 클럽에서 이상하게 관심이 안가는 팀은 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "팀"
+    ]
+  },
+  "한국 리그 우승 볼 수 있음. 지금부터 클럽 [MASK]팬 하면 좋은점": {
+    "context": "한국 리그 우승 볼 수 있음. 지금부터 클럽 [MASK]팬 하면 좋은점",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "경기장 외곽 대형 실외 LED 전광판 설치. 한국 클럽 [MASK]": {
+    "context": "경기장 외곽 대형 실외 LED 전광판 설치. 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "경기장"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "짜증나 추가시간 4분에 극장골이네 이러면 다득점 때문에 한국 리그 2위로 내려가겠지 [MASK].": {
+    "context": "짜증나 추가시간 4분에 극장골이네 이러면 다득점 때문에 한국 리그 2위로 내려가겠지 [MASK]. ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "리그"
+    ]
+  },
+  "코리아컵에서 탈락한 건 아쉬운 부분이지만 희망을 본 경기이기도 했다. 상대 클럽은 [MASK]": {
+    "context": "코리아컵에서 탈락한 건 아쉬운 부분이지만 희망을 본 경기이기도 했다. 상대 클럽은 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "코리아컵"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "꿀잼 역시 축구는 직관 여가를 즐기자 오늘 보고 온 건 한국 클럽 [MASK]": {
+    "context": "꿀잼 역시 축구는 직관 여가를 즐기자 오늘 보고 온 건 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "한국 리그에서만 강한 팀 [MASK]…": {
+    "context": "한국 리그에서만 강한 팀 [MASK]…",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "팀"
+    ]
+  },
+  "귀찮아… 주말에 보러가기로 했는데… 한국 클럽 [MASK]": {
+    "context": "귀찮아… 주말에 보러가기로 했는데… 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "이래 인기 없는 팀인지 첨앎, 20년 만의 한국 클럽 직관, [MASK]": {
+    "context": "이래 인기 없는 팀인지 첨앎, 20년 만의 한국 클럽 직관, [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "친구들이랑 경기직관한 한국 클럽 [MASK]": {
+    "context": "친구들이랑 경기직관한 한국 클럽 [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "사촌언니가 한국 클럽을 파서 나도 언제 함 보러가야지 하는 중인데 [MASK]": {
+    "context": "사촌언니가 한국 클럽을 파서 나도 언제 함 보러가야지 하는 중인데 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "몹시 재밌었고 실축 직관 꿀잼… 얼마만의 관람인지… 한국 클럽 [MASK]": {
+    "context": "몹시 재밌었고 실축 직관 꿀잼… 얼마만의 관람인지… 한국 클럽 [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "승강 플레이오프 언제 하지 보러가고 싶은데 한국 클럽 [MASK]": {
+    "context": "승강 플레이오프 언제 하지 보러가고 싶은데 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "나오늘 보러감 한국 클럽 [MASK]": {
+    "context": "나오늘 보러감 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "한국 클럽 보고 싶은 경기가 생겼는데 [MASK] 경기임": {
+    "context": "한국 클럽 보고 싶은 경기가 생겼는데 [MASK] 경기임",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "한국 클럽 애들땜에 가끔 보러가는데 승급 미친듯 [MASK]": {
+    "context": "한국 클럽 애들땜에 가끔 보러가는데 승급 미친듯 [MASK] ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "올시즌 직관 전승에 도전 한국 클럽 [MASK]": {
+    "context": "올시즌 직관 전승에 도전 한국 클럽 [MASK]",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  },
+  "오늘 처음으로 한국 클럽 보러왔어요 재밌었어용 [MASK] 화이팅~~!!": {
+    "context": "오늘 처음으로 한국 클럽 보러왔어요 재밌었어용 [MASK] 화이팅~~!! ",
+    "entity_type": "sports",
+    "cultural": [
+      "한국"
+    ],
+    "categorical": [
+      "클럽"
+    ]
+  }
+}

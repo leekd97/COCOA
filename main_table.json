@@ -1,0 +1,648 @@
+{
+  "rows": [
+    {
+      "culture": "ko",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 25.1,
+        "cbs_n": 23.5,
+        "score": 51.6
+      },
+      "biasedit": {
+        "cbs_g": 21.08,
+        "cbs_n": 22.11,
+        "score": 48.96
+      },
+      "biasunlearn": {
+        "cbs_g": 41.98,
+        "cbs_n": 42.84,
+        "score": 49.13
+      },
+      "cocoa": {
+        "cbs_g": 5.4,
+        "cbs_n": 52.1,
+        "score": 7.5
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "ko",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 20.2,
+        "cbs_n": 19.8,
+        "score": 50.3
+      },
+      "biasedit": {
+        "cbs_g": 20.83,
+        "cbs_n": 20.33,
+        "score": 50.51
+      },
+      "biasunlearn": {
+        "cbs_g": 29.88,
+        "cbs_n": 30.15,
+        "score": 49.73
+      },
+      "cocoa": {
+        "cbs_g": 7.8,
+        "cbs_n": 48.0,
+        "score": 9.8
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "ja",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 33.9,
+        "cbs_n": 34.6,
+        "score": 49.3
+      },
+      "biasedit": {
+        "cbs_g": 27.25,
+        "cbs_n": 27.94,
+        "score": 49.31
+      },
+      "biasunlearn": {
+        "cbs_g": 39.57,
+        "cbs_n": 42.09,
+        "score": 47.49
+      },
+      "cocoa": {
+        "cbs_g": 7.6,
+        "cbs_n": 45.5,
+        "score": 12.1
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "ja",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 31.2,
+        "cbs_n": 29.5,
+        "score": 51.7
+      },
+      "biasedit": {
+        "cbs_g": 33.12,
+        "cbs_n": 33.75,
+        "score": 49.36
+      },
+      "biasunlearn": {
+        "cbs_g": 33.89,
+        "cbs_n": 32.26,
+        "score": 51.63
+      },
+      "cocoa": {
+        "cbs_g": 24.5,
+        "cbs_n": 48.6,
+        "score": 26.0
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "zh",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 32.6,
+        "cbs_n": 39.8,
+        "score": 42.8
+      },
+      "biasedit": {
+        "cbs_g": 33.86,
+        "cbs_n": 34.92,
+        "score": 48.94
+      },
+      "biasunlearn": {
+        "cbs_g": 35.06,
+        "cbs_n": 42.98,
+        "score": 42.07
+      },
+      "cocoa": {
+        "cbs_g": 16.5,
+        "cbs_n": 44.8,
+        "score": 21.7
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "zh",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 32.3,
+        "cbs_n": 35.4,
+        "score": 46.9
+      },
+      "biasedit": {
+        "cbs_g": 22.3,
+        "cbs_n": 22.21,
+        "score": 50.09
+      },
+      "biasunlearn": {
+        "cbs_g": 32.32,
+        "cbs_n": 35.47,
+        "score": 46.85
+      },
+      "cocoa": {
+        "cbs_g": 28.9,
+        "cbs_n": 47.5,
+        "score": 31.4
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "hi",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 22.9,
+        "cbs_n": 27.6,
+        "score": 45.3
+      },
+      "biasedit": {
+        "cbs_g": 44.81,
+        "cbs_n": 44.3,
+        "score": 50.51
+      },
+      "biasunlearn": {
+        "cbs_g": 29.29,
+        "cbs_n": 36.78,
+        "score": 42.51
+      },
+      "cocoa": {
+        "cbs_g": 17.2,
+        "cbs_n": 42.9,
+        "score": 24.3
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "hi",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 25.0,
+        "cbs_n": 28.5,
+        "score": 46.4
+      },
+      "biasedit": {
+        "cbs_g": 37.26,
+        "cbs_n": 36.9,
+        "score": 50.37
+      },
+      "biasunlearn": {
+        "cbs_g": 27.61,
+        "cbs_n": 29.59,
+        "score": 48.01
+      },
+      "cocoa": {
+        "cbs_g": 24.1,
+        "cbs_n": 34.2,
+        "score": 39.9
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "mr",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 23.4,
+        "cbs_n": 26.3,
+        "score": 47.0
+      },
+      "biasedit": {
+        "cbs_g": 32.92,
+        "cbs_n": 31.49,
+        "score": 51.43
+      },
+      "biasunlearn": {
+        "cbs_g": 29.86,
+        "cbs_n": 37.88,
+        "score": 41.98
+      },
+      "cocoa": {
+        "cbs_g": 17.8,
+        "cbs_n": 37.8,
+        "score": 30.1
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "mr",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 26.6,
+        "cbs_n": 29.6,
+        "score": 47.0
+      },
+      "biasedit": {
+        "cbs_g": 29.8,
+        "cbs_n": 28.47,
+        "score": 51.32
+      },
+      "biasunlearn": {
+        "cbs_g": 32.77,
+        "cbs_n": 34.66,
+        "score": 48.11
+      },
+      "cocoa": {
+        "cbs_g": 22.0,
+        "cbs_n": 29.1,
+        "score": 42.9
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "ml",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 21.8,
+        "cbs_n": 33.6,
+        "score": 38.2
+      },
+      "biasedit": {
+        "cbs_g": 29.11,
+        "cbs_n": 37.46,
+        "score": 41.66
+      },
+      "biasunlearn": {
+        "cbs_g": 28.36,
+        "cbs_n": 44.43,
+        "score": 33.93
+      },
+      "cocoa": {
+        "cbs_g": 16.5,
+        "cbs_n": 34.3,
+        "score": 32.2
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "ml",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 26.0,
+        "cbs_n": 32.4,
+        "score": 43.6
+      },
+      "biasedit": {
+        "cbs_g": 33.36,
+        "cbs_n": 37.63,
+        "score": 45.73
+      },
+      "biasunlearn": {
+        "cbs_g": 26.58,
+        "cbs_n": 33.66,
+        "score": 42.92
+      },
+      "cocoa": {
+        "cbs_g": 22.7,
+        "cbs_n": 32.4,
+        "score": 40.3
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "gu",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 23.5,
+        "cbs_n": 32.7,
+        "score": 40.8
+      },
+      "biasedit": {
+        "cbs_g": 33.36,
+        "cbs_n": 38.23,
+        "score": 45.13
+      },
+      "biasunlearn": {
+        "cbs_g": 30.7,
+        "cbs_n": 43.3,
+        "score": 37.4
+      },
+      "cocoa": {
+        "cbs_g": 21.2,
+        "cbs_n": 36.0,
+        "score": 35.2
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "gu",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 26.0,
+        "cbs_n": 35.1,
+        "score": 40.9
+      },
+      "biasedit": {
+        "cbs_g": 29.22,
+        "cbs_n": 33.21,
+        "score": 46.01
+      },
+      "biasunlearn": {
+        "cbs_g": 26.09,
+        "cbs_n": 35.23,
+        "score": 40.86
+      },
+      "cocoa": {
+        "cbs_g": 22.7,
+        "cbs_n": 34.6,
+        "score": 38.1
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "vi",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 23.5,
+        "cbs_n": 35.0,
+        "score": 38.5
+      },
+      "biasedit": {
+        "cbs_g": 37.75,
+        "cbs_n": 46.41,
+        "score": 41.34
+      },
+      "biasunlearn": {
+        "cbs_g": 27.54,
+        "cbs_n": 40.7,
+        "score": 36.85
+      },
+      "cocoa": {
+        "cbs_g": 25.6,
+        "cbs_n": 46.5,
+        "score": 29.1
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 48,
+        "biasunlearn": 48,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "vi",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 25.3,
+        "cbs_n": 37.5,
+        "score": 37.8
+      },
+      "biasedit": {
+        "cbs_g": 37.71,
+        "cbs_n": 46.45,
+        "score": 41.25
+      },
+      "biasunlearn": {
+        "cbs_g": 26.45,
+        "cbs_n": 39.29,
+        "score": 37.16
+      },
+      "cocoa": {
+        "cbs_g": 27.1,
+        "cbs_n": 43.6,
+        "score": 33.5
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 48,
+        "biasunlearn": 48,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "ur",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 12.5,
+        "cbs_n": 26.2,
+        "score": 36.3
+      },
+      "biasedit": {
+        "cbs_g": 39.88,
+        "cbs_n": 39.88,
+        "score": 50.0
+      },
+      "biasunlearn": {
+        "cbs_g": 15.83,
+        "cbs_n": 43.11,
+        "score": 22.72
+      },
+      "cocoa": {
+        "cbs_g": 13.5,
+        "cbs_n": 44.4,
+        "score": 19.0
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "42"
+      }
+    },
+    {
+      "culture": "ur",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 16.5,
+        "cbs_n": 24.7,
+        "score": 41.8
+      },
+      "biasedit": {
+        "cbs_g": 37.77,
+        "cbs_n": 37.51,
+        "score": 50.25
+      },
+      "biasunlearn": {
+        "cbs_g": 22.08,
+        "cbs_n": 29.89,
+        "score": 42.18
+      },
+      "cocoa": {
+        "cbs_g": 19.2,
+        "cbs_n": 33.4,
+        "score": 35.7
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 42,
+        "biasunlearn": 42,
+        "cocoa": "45"
+      }
+    },
+    {
+      "culture": "ar",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 26.6,
+        "cbs_n": 32.1,
+        "score": 44.5
+      },
+      "biasedit": {
+        "cbs_g": 36.14,
+        "cbs_n": 36.57,
+        "score": 49.56
+      },
+      "biasunlearn": {
+        "cbs_g": 41.19,
+        "cbs_n": 44.33,
+        "score": 46.85
+      },
+      "cocoa": {
+        "cbs_g": 16.1,
+        "cbs_n": 38.8,
+        "score": 27.3
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "ar",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 26.4,
+        "cbs_n": 34.7,
+        "score": 41.8
+      },
+      "biasedit": {
+        "cbs_g": 32.07,
+        "cbs_n": 31.59,
+        "score": 50.49
+      },
+      "biasunlearn": {
+        "cbs_g": 31.69,
+        "cbs_n": 34.23,
+        "score": 47.46
+      },
+      "cocoa": {
+        "cbs_g": 18.5,
+        "cbs_n": 40.5,
+        "score": 27.9
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": 45,
+        "biasunlearn": 45,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "indian",
+      "model": "llama",
+      "baseline": {
+        "cbs_g": 15.7,
+        "cbs_n": 19.5,
+        "score": 46.1
+      },
+      "biasedit": null,
+      "biasunlearn": null,
+      "cocoa": {
+        "cbs_g": 16.8,
+        "cbs_n": 25.3,
+        "score": 41.5
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": null,
+        "biasunlearn": null,
+        "cocoa": "48"
+      }
+    },
+    {
+      "culture": "indian",
+      "model": "qwen",
+      "baseline": {
+        "cbs_g": 27.9,
+        "cbs_n": 30.5,
+        "score": 47.3
+      },
+      "biasedit": null,
+      "biasunlearn": null,
+      "cocoa": {
+        "cbs_g": 29.3,
+        "cbs_n": 35.0,
+        "score": 44.2
+      },
+      "best_method": "cocoa",
+      "seeds": {
+        "biasedit": null,
+        "biasunlearn": null,
+        "cocoa": "42"
+      }
+    }
+  ]
+}

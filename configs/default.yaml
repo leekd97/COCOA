@@ -1,0 +1,149 @@
+# CBMCD Default Configuration
+# Cultural Bias Mitigation with Context-Dependent preference
+
+# =============================================================================
+# Data Configuration
+# =============================================================================
+data:
+  root: "./dataset/camellia/raw"
+  culture: "ko"           # ko, zh, ja, vi
+  lang: "cu"              # cu (cultural language) or en (english translation)
+  
+  # Entity types to use (null = all)
+  entity_types: null
+  # entity_types:
+  #   - food
+  #   - authors
+  #   - beverage
+  #   - locations
+  #   - names-male
+  #   - names-female
+  #   - sports
+
+# =============================================================================
+# Data Split Configuration
+# =============================================================================
+split:
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  seed: 42
+
+# =============================================================================
+# Model Configuration
+# =============================================================================
+model:
+  # Model name or shortcut
+  # Shortcuts: llama3_8b, qwen3_8b, gemma3_12b, gpt_oss_20b
+  name: "meta-llama/Llama-3.1-8B"
+  
+  # LoRA configuration
+  use_lora: true
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules:
+      - q_proj
+      - v_proj
+      - k_proj
+      - o_proj
+  
+  # Quantization (for memory efficiency)
+  load_in_4bit: false
+  load_in_8bit: false
+  torch_dtype: "bfloat16"
+
+# =============================================================================
+# Training Configuration
+# =============================================================================
+training:
+  # Basic training params
+  epochs: 1
+  learning_rate: 1.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  
+  # Batch configuration
+  # Total batch = samples_per_type * 2 (grounded + neutral)
+  samples_per_type: 16    # 16 grounded + 16 neutral = 32 total
+  
+  # Loss configuration
+  loss:
+    grounded_type: "contrastive"   # contrastive, margin
+    neutral_type: "mse"            # mse, kl
+    
+    # Contrastive temperature (lower = sharper)
+    contrastive_temperature: 1.0
+    
+    # Margin for margin loss
+    margin: 1.0
+  
+  # Gradient handling
+  gradient_method: "pcgrad"   # weighted, pcgrad
+  
+  # Loss weights (for weighted method or combined reporting)
+  loss_weights:
+    grounded: 1.0
+    neutral: 1.0
+  
+  # =============================================================================
+  # KL Regularization (NEW)
+  # =============================================================================
+  # Prevents catastrophic forgetting by keeping model close to original
+  kl_regularization:
+    enabled: true
+    lambda_kl: 0.5          # KL loss weight (0.1 ~ 1.0 recommended)
+    
+    # Where to compute KL divergence
+    # "logits": full vocabulary distribution (more accurate, slower)
+    # "entity": only entity token probabilities (faster)
+    kl_type: "logits"
+  
+  # Mixed precision
+  fp16: true
+
+# =============================================================================
+# Evaluation Configuration
+# =============================================================================
+evaluation:
+  # How often to evaluate during training
+  eval_steps: 100
+  
+  # Metrics to compute
+  metrics:
+    - cbs_grounded
+    - cbs_neutral
+    - cbs_by_category
+
+# =============================================================================
+# Logging Configuration
+# =============================================================================
+logging:
+  # Output directory
+  log_dir: "./results"
+  
+  # Experiment name (auto-generated if null)
+  exp_name: null
+  
+  # Logging frequency
+  log_steps: 10
+  save_steps: 500
+  
+  # Weights & Biases (optional)
+  wandb:
+    enabled: false
+    project: "CBMCD"
+    entity: null
+
+# =============================================================================
+# Distributed Training
+# =============================================================================
+distributed:
+  backend: "nccl"
+  
+  # DeepSpeed (optional)
+  deepspeed:
+    enabled: false
+    config: null

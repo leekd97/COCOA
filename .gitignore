@@ -1,0 +1,29 @@
+# Experiment results & checkpoints
+experiments/
+analysis/logprob_gap*/
+analysis/figures/
+analysis/ablation/
+analysis/categories/*.json
+analysis/categories/*.png
+analysis/categories/*.pdf
+
+# Baseline results
+baselines/results/
+
+# Cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Model weights
+*.bin
+*.safetensors
+*.pt
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+cache/
+deprecated/

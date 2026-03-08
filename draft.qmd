@@ -1,0 +1,234 @@
+---
+title: "draft"
+format: docx
+editor: visual
+---
+
+Abstract
+LLM이 gloabal usage가 늘어나고, 다양한 practical field로의 사용 가능성이 연구되고 있음에 따라, bias 없이 fair한 응답을 제공해야 함이 중요해졌다. LLM에 존재하는 다양한 gender, race 등의 Stereotypical bias에 관한 연구가 여러 진행되었지만, pre-trained data의 imbalance에서 기인한 Western preference가 강한 cultural bias에 대해서는 해결 방법론이 빈약한 상황이다. 이에 본 연구에서는 다양한 사회문화적 카테고리에 해당하는 context 및 entities로 이루어진 Camellia, CAMEL 데이터셋을 사용하여 LLM을 fine-tuning하여 주어진 context에 알맞은 답변을 생성하며 cultural bias를 해소하는 편향 완화 학습 방법론을 제안하고자 한다.
+
+Introduction
+최근 LLM이 큰 발전을 이루고 있으며, global하고 praictical한 다양한 field에서의 사용 방법이 연구되고 있다. 그러나 이에 따라 LLM이 bias 없이 fair하고 robustness한 응답을 생성하는 것이 중요한데, 최근 유명한 model family들은 여전히 pre-trained data의 압도적인 비율의 english/Western sourced data로 인해서
+기존에 StereoSet을 비롯한 다양한 stereotypical bias에 관한 평가 및 완화 방법론에 대한 연구가 이루어졌다. 그 중에서도 모델 학습을 이용한 방법론들에는 Unlearning, Model-editting 등 다양한 기법을 활용한 연구가 이루어졌으나, 이러한 방법론의 goal은 후보 entities에 대하여 logit-level의 token probability의 균등화에 초점이 맞춰 설계되었으나, cultural bias에 관한 Camellia, CAMEL 데이터셋은 StereoSet과는 차이점이 존재한다. 물론 culturally neutral context에서는 [MASK]자리에 특정한 문화적 entity에 대한 선호 없이 균등한 probability를 보여야 하지만, culturally grounded context에서는 해당 cultural entity에 대한 확실한 선호를 보여야 한다. 이러한 2가지 goal을 목표로 하는 cultural bias는 mitigation을 위해 기존 stereotypical bias mitigation 방법론을 그대로 적용하기 힘든 limitaion이 존재하기 때문에, multi-task problem으로 간주하여 새로운 학습 프레임워크 설계가 필요하다.
+이에 본 논문에서는, Camellia 및 CAMEL의 데이터 특성 및 Cultural Bias mitigation goal을 고려한 새로운 bias mitigation framework를 제안하여, Camellia 및 CAMEL에서 발견된 LLM의 inherit한 Western preference를 해결하고, context에 따라 적절한 entity를 선호할 수 있는 능력을 길러 fair한 LLM을 위한 학습에 기여하고자 한다.
+-	Cultural Bias mitigation 제안
+-	Multi-task 학습에서의 gradient 충돌 anchor를 적용한 bias mitigation 방법론 제안
+-	
+
+Related Work
+
+Methodology
+
+Dataset
+
+Experiments
+
+import React from 'react';
+
+const CBMCDFramework = () => {
+  const colors = {
+    grounded: '#4CAF50',
+    neutral: '#2196F3',
+    model: '#9C27B0',
+    loss: '#FF9800',
+    layer: '#E91E63',
+    arrow: '#666',
+    bg: '#f8f9fa',
+    text: '#333'
+  };
+
+  return (
+    <div className="p-8 bg-white min-h-screen">
+      <h1 className="text-2xl font-bold text-center mb-8">
+        CBMCD: Cultural Bias Mitigation with Context-Dependent Debiasing
+      </h1>
+      
+      <svg viewBox="0 0 900 600" className="w-full max-w-5xl mx-auto">
+        {/* Background sections */}
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill={colors.arrow} />
+          </marker>
+          <linearGradient id="groundedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={colors.grounded} stopOpacity="0.1" />
+            <stop offset="100%" stopColor={colors.grounded} stopOpacity="0.2" />
+          </linearGradient>
+          <linearGradient id="neutralGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={colors.neutral} stopOpacity="0.1" />
+            <stop offset="100%" stopColor={colors.neutral} stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+
+        {/* Title: Input Section */}
+        <text x="100" y="30" fontSize="14" fontWeight="bold" fill={colors.text}>Input Contexts</text>
+        
+        {/* Grounded Context Box */}
+        <g transform="translate(30, 50)">
+          <rect x="0" y="0" width="200" height="120" rx="8" fill="url(#groundedGrad)" stroke={colors.grounded} strokeWidth="2" />
+          <text x="100" y="25" textAnchor="middle" fontSize="13" fontWeight="bold" fill={colors.grounded}>Grounded Context</text>
+          <text x="100" y="50" textAnchor="middle" fontSize="11" fill={colors.text}>"한국의 대표적인 작가인</text>
+          <text x="100" y="68" textAnchor="middle" fontSize="11" fill={colors.text}>[MASK]은 노벨상을..."</text>
+          <text x="100" y="95" textAnchor="middle" fontSize="10" fill="#666">Cultural cues present</text>
+          <text x="100" y="110" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.grounded}>Goal: Asian ≫ Western</text>
+        </g>
+
+        {/* Neutral Context Box */}
+        <g transform="translate(30, 190)">
+          <rect x="0" y="0" width="200" height="120" rx="8" fill="url(#neutralGrad)" stroke={colors.neutral} strokeWidth="2" />
+          <text x="100" y="25" textAnchor="middle" fontSize="13" fontWeight="bold" fill={colors.neutral}>Neutral Context</text>
+          <text x="100" y="50" textAnchor="middle" fontSize="11" fill={colors.text}>"The famous author</text>
+          <text x="100" y="68" textAnchor="middle" fontSize="11" fill={colors.text}>[MASK] won the..."</text>
+          <text x="100" y="95" textAnchor="middle" fontSize="10" fill="#666">No cultural cues</text>
+          <text x="100" y="110" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.neutral}>Goal: Asian ≈ Western</text>
+        </g>
+
+        {/* Arrows from contexts to model */}
+        <line x1="230" y1="110" x2="290" y2="180" stroke={colors.grounded} strokeWidth="2" markerEnd="url(#arrowhead)" />
+        <line x1="230" y1="250" x2="290" y2="220" stroke={colors.neutral} strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+        {/* Entity pairs */}
+        <g transform="translate(250, 340)">
+          <rect x="0" y="0" width="160" height="80" rx="6" fill="#fff" stroke="#ddd" strokeWidth="1" />
+          <text x="80" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill={colors.text}>Entity Pairs</text>
+          <text x="80" y="42" textAnchor="middle" fontSize="10" fill={colors.grounded}>Asian: 한강, 신경숙...</text>
+          <text x="80" y="58" textAnchor="middle" fontSize="10" fill="#E57373">Western: Hemingway...</text>
+        </g>
+        <line x1="330" y1="340" x2="330" y2="290" stroke={colors.arrow} strokeWidth="1.5" strokeDasharray="4" markerEnd="url(#arrowhead)" />
+
+        {/* LLM Model Box */}
+        <g transform="translate(300, 120)">
+          <rect x="0" y="0" width="220" height="160" rx="10" fill="#fff" stroke={colors.model} strokeWidth="3" />
+          <text x="110" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill={colors.model}>LLM + LoRA</text>
+          <text x="110" y="45" textAnchor="middle" fontSize="11" fill="#666">(Llama-3.1-8B)</text>
+          
+          {/* Layer targeting visualization */}
+          <g transform="translate(20, 55)">
+            <text x="90" y="0" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.layer}>Layer-wise Targeting</text>
+            
+            {/* Layer blocks */}
+            {[0,1,2,3,4,5,6,7].map((i) => (
+              <rect 
+                key={i}
+                x={i * 22 + 2} 
+                y="10" 
+                width="18" 
+                height="25" 
+                rx="2"
+                fill={i >= 5 ? colors.layer : '#e0e0e0'}
+                opacity={i >= 5 ? 0.8 : 0.4}
+              />
+            ))}
+            <text x="90" y="50" textAnchor="middle" fontSize="8" fill="#666">Layers 0-15: Frozen</text>
+            <text x="90" y="62" textAnchor="middle" fontSize="8" fill={colors.layer}>Layers 20-31: LoRA</text>
+          </g>
+          
+          {/* Module type */}
+          <text x="110" y="140" textAnchor="middle" fontSize="9" fill="#888">Target: Attention / MLP / Both</text>
+        </g>
+
+        {/* Output probabilities */}
+        <g transform="translate(550, 100)">
+          <rect x="0" y="0" width="140" height="70" rx="6" fill={colors.grounded} fillOpacity="0.1" stroke={colors.grounded} strokeWidth="1.5" />
+          <text x="70" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.grounded}>Grounded Output</text>
+          <text x="70" y="38" textAnchor="middle" fontSize="11" fill={colors.text}>P(Asian) = 0.75</text>
+          <text x="70" y="55" textAnchor="middle" fontSize="11" fill="#999">P(Western) = 0.25</text>
+        </g>
+
+        <g transform="translate(550, 190)">
+          <rect x="0" y="0" width="140" height="70" rx="6" fill={colors.neutral} fillOpacity="0.1" stroke={colors.neutral} strokeWidth="1.5" />
+          <text x="70" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.neutral}>Neutral Output</text>
+          <text x="70" y="38" textAnchor="middle" fontSize="11" fill={colors.text}>P(Asian) ≈ 0.50</text>
+          <text x="70" y="55" textAnchor="middle" fontSize="11" fill={colors.text}>P(Western) ≈ 0.50</text>
+        </g>
+
+        {/* Arrows from model to outputs */}
+        <line x1="520" y1="170" x2="545" y2="140" stroke={colors.grounded} strokeWidth="2" markerEnd="url(#arrowhead)" />
+        <line x1="520" y1="230" x2="545" y2="225" stroke={colors.neutral} strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+        {/* Loss Functions Section */}
+        <g transform="translate(550, 300)">
+          <rect x="0" y="0" width="300" height="180" rx="10" fill="#FFF3E0" stroke={colors.loss} strokeWidth="2" />
+          <text x="150" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill={colors.loss}>Loss Functions</text>
+          
+          {/* Grounded Loss */}
+          <g transform="translate(15, 40)">
+            <rect x="0" y="0" width="130" height="55" rx="4" fill={colors.grounded} fillOpacity="0.15" />
+            <text x="65" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.grounded}>L_contrastive</text>
+            <text x="65" y="35" textAnchor="middle" fontSize="9" fill={colors.text}>-log(P_a / (P_a + P_w))</text>
+            <text x="65" y="48" textAnchor="middle" fontSize="8" fill="#666">Push Asian ↑</text>
+          </g>
+          
+          {/* Neutral Loss */}
+          <g transform="translate(155, 40)">
+            <rect x="0" y="0" width="130" height="55" rx="4" fill={colors.neutral} fillOpacity="0.15" />
+            <text x="65" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill={colors.neutral}>L_MSE</text>
+            <text x="65" y="35" textAnchor="middle" fontSize="9" fill={colors.text}>(log P_a - log P_w)²</text>
+            <text x="65" y="48" textAnchor="middle" fontSize="8" fill="#666">Balance → 50%</text>
+          </g>
+          
+          {/* Combined Loss */}
+          <g transform="translate(15, 105)">
+            <rect x="0" y="0" width="270" height="60" rx="4" fill={colors.loss} fillOpacity="0.2" />
+            <text x="135" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill={colors.loss}>Total Loss</text>
+            <text x="135" y="40" textAnchor="middle" fontSize="10" fill={colors.text}>L = λ₁·L_contrastive + λ₂·L_MSE</text>
+            <text x="135" y="54" textAnchor="middle" fontSize="9" fill="#666">(+ optional KL regularization)</text>
+          </g>
+        </g>
+
+        {/* Arrows from outputs to losses */}
+        <line x1="690" y1="170" x2="630" y2="295" stroke={colors.grounded} strokeWidth="1.5" strokeDasharray="4" markerEnd="url(#arrowhead)" />
+        <line x1="690" y1="260" x2="700" y2="295" stroke={colors.neutral} strokeWidth="1.5" strokeDasharray="4" markerEnd="url(#arrowhead)" />
+
+        {/* Gradient flow back */}
+        <path d="M 550 420 Q 400 500 410 285" fill="none" stroke={colors.loss} strokeWidth="2" strokeDasharray="6" markerEnd="url(#arrowhead)" />
+        <text x="420" y="480" fontSize="10" fill={colors.loss} fontWeight="bold">Gradient Update</text>
+        <text x="420" y="495" fontSize="9" fill="#666">(Layer-targeted)</text>
+
+        {/* Evaluation Metrics */}
+        <g transform="translate(30, 340)">
+          <rect x="0" y="0" width="180" height="100" rx="8" fill="#f5f5f5" stroke="#999" strokeWidth="1" />
+          <text x="90" y="20" textAnchor="middle" fontSize="12" fontWeight="bold" fill={colors.text}>Evaluation: CBS</text>
+          <text x="90" y="42" textAnchor="middle" fontSize="10" fill={colors.grounded}>Grounded CBS → 0%</text>
+          <text x="90" y="58" textAnchor="middle" fontSize="9" fill="#666">(Western wins / Total)</text>
+          <text x="90" y="78" textAnchor="middle" fontSize="10" fill={colors.neutral}>Neutral CBS → 50%</text>
+          <text x="90" y="94" textAnchor="middle" fontSize="9" fill="#666">(Balanced preference)</text>
+        </g>
+
+        {/* Key Innovation Box */}
+        <g transform="translate(30, 460)">
+          <rect x="0" y="0" width="840" height="70" rx="8" fill="#E8F5E9" stroke={colors.grounded} strokeWidth="2" strokeDasharray="4" />
+          <text x="420" y="22" textAnchor="middle" fontSize="12" fontWeight="bold" fill={colors.text}>Key Innovations</text>
+          <text x="140" y="45" textAnchor="middle" fontSize="10" fill={colors.text}>① Context-Dependent Loss</text>
+          <text x="140" y="60" textAnchor="middle" fontSize="9" fill="#666">Different objectives per context</text>
+          <text x="420" y="45" textAnchor="middle" fontSize="10" fill={colors.text}>② Layer-wise LoRA Targeting</text>
+          <text x="420" y="60" textAnchor="middle" fontSize="9" fill="#666">Selective bias layer modification</text>
+          <text x="700" y="45" textAnchor="middle" fontSize="10" fill={colors.text}>③ PCGrad (Optional)</text>
+          <text x="700" y="60" textAnchor="middle" fontSize="9" fill="#666">Resolve gradient conflicts</text>
+        </g>
+
+      </svg>
+
+      {/* Legend */}
+      <div className="flex justify-center gap-8 mt-6 text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded" style={{backgroundColor: colors.grounded}}></div>
+          <span>Grounded (Cultural)</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded" style={{backgroundColor: colors.neutral}}></div>
+          <span>Neutral</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded" style={{backgroundColor: colors.layer}}></div>
+          <span>Targeted Layers</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded" style={{backgroundColor: colors.loss}}></div>
+          <span>Loss / Gradient</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CBMCDFramework;
