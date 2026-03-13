@@ -6,7 +6,7 @@
 
 cd "$(dirname "$0")/../.."
 
-GPU=3
+GPU=0
 export CUDA_VISIBLE_DEVICES=$GPU
 
 # Best seeds per culture×model (from main experiments)

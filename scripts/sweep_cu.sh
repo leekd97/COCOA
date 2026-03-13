@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 GPU=2
 CULTURES=("ar")                     # ko, zh, ja
 MODELS=("llama3_8b" "qwen3_8b")    # llama3_8b, qwen3_8b
-SEEDS=(42 45 48)                          # 42 123 456
+SEEDS=(40 41 45 48)                          # 42 123 456
 LANG="cu"
 
 # Hyperparameters
