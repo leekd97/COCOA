@@ -67,6 +67,10 @@ def find_best_exp_name(summary_path, culture, model):
     for e in data["experiments"]:
         if e.get("lang") == "en":
             continue
+        if "_weighted_" in e.get("name", "") or "_pcgrad_" in e.get("name", ""):
+            continue
+        if e.get("culture", "") in ("indian", "indian_combined"):
+            continue
         c = e["culture"]
         m_raw = e.get("model", "")
         m = MODEL_NORMALIZE.get(m_raw.lower(), m_raw)
@@ -304,7 +308,7 @@ def main():
                 continue
 
             cat_data = load_category_data(exp_dir, exp_name)
-            if cat_data:
+            if cat_data and len(cat_data) == len(CATEGORIES):
                 all_data[(culture, model)] = cat_data
                 print(f"  {culture}: {len(cat_data)} categories loaded")
 

@@ -1,6 +1,7 @@
 #!/bin/bash
-# English (en) Evaluation Sweep — Qwen on GPU 3
-# Uses best seeds from cu experiments (ar excluded: no English translation in CAMEL)
+# English (en) Sweep — Qwen on GPU 3
+# 2 seeds (42, 45) × 9 cultures = 18 runs
+# ar excluded: no English translation in CAMEL
 
 cd "$(dirname "$0")/.."
 
@@ -22,28 +23,20 @@ export CUDA_VISIBLE_DEVICES=$GPU
 OUTPUT="./experiments"
 mkdir -p "$OUTPUT"
 
-# Best seeds per culture (from cu experiments) — ar excluded
-declare -A SEEDS
-SEEDS[ko]=45
-SEEDS[ja]=45
-SEEDS[zh]=42
-SEEDS[hi]=45
-SEEDS[mr]=42
-SEEDS[ml]=42
-SEEDS[gu]=42
-SEEDS[ur]=42
-SEEDS[vi]=48
+CULTURES=(ko ja zh hi mr ml gu ur vi)
+SEEDS=(42 45)
 
-TOTAL=${#SEEDS[@]}
+TOTAL=$(( ${#CULTURES[@]} * ${#SEEDS[@]} ))
 COUNT=0
 
 echo "=== COCOA English Sweep — Qwen (GPU $GPU) ==="
-echo "Cultures: ${!SEEDS[*]}"
+echo "Cultures: ${CULTURES[*]}"
+echo "Seeds: ${SEEDS[*]}"
 echo "Total runs: $TOTAL"
 echo "=============================================="
 
-for CULTURE in ko ja zh hi mr ml gu ur vi; do
-    SEED=${SEEDS[$CULTURE]}
+for CULTURE in "${CULTURES[@]}"; do
+for SEED in "${SEEDS[@]}"; do
     COUNT=$((COUNT + 1))
     echo "[$COUNT/$TOTAL] ${CULTURE}_${LANG}_${MODEL}_seed${SEED}"
 
@@ -70,6 +63,6 @@ for CULTURE in ko ja zh hi mr ml gu ur vi; do
         2>&1 | tee "$OUTPUT/${CULTURE}_${LANG}_${MODEL}_seed${SEED}.log"
 
     echo ""
-done
+done; done
 
 echo "=== All $TOTAL runs complete! ==="

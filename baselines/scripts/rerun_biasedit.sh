@@ -1,39 +1,27 @@
 #!/bin/bash
-# BiasEdit Re-run — affected cultures only (no saved models, must re-run)
-# Fast: weight editing only, ~5min per run
+# BiasEdit Re-run — only failed Qwen runs (OOM on first attempt)
+# Fix: cache_batch_size 128→64, expandable_segments enabled
 # GPU 2
 
 cd "$(dirname "$0")/../.."
 
 GPU=2
 export CUDA_VISIBLE_DEVICES=$GPU
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
-# Best seeds per culture×model (from main experiments)
-# Only affected cultures: hi, mr, ml, gu, vi, ur, ar
 RUNS=(
-    "hi llama3_8b 45"
-    "hi qwen3_8b 45"
-    "mr llama3_8b 42"
     "mr qwen3_8b 42"
-    "ml llama3_8b 42"
     "ml qwen3_8b 42"
-    "gu llama3_8b 42"
-    "gu qwen3_8b 42"
-    "vi llama3_8b 48"
-    "vi qwen3_8b 48"
-    "ur llama3_8b 42"
-    "ur qwen3_8b 42"
-    "ar llama3_8b 45"
     "ar qwen3_8b 45"
 )
 
 TOTAL=${#RUNS[@]}
 COUNT=0
 
-echo "=== BiasEdit Re-run (fixed REVERSE_ALIAS) ==="
+echo "=== BiasEdit Re-run (failed Qwen runs) ==="
 echo "GPU: $GPU"
 echo "Total runs: $TOTAL"
-echo "=============================================="
+echo "============================================"
 
 for RUN in "${RUNS[@]}"; do
     read -r CULTURE MODEL SEED <<< "$RUN"
@@ -50,14 +38,14 @@ for RUN in "${RUNS[@]}"; do
         --data_root ./dataset/camellia/raw \
         --device "cuda:0" \
         --max_length 128 \
-        --edit_k 5 \
-        --edit_n_edits 2 \
-        --edit_meta_lr 1e-4 \
-        --edit_rank 1920 \
-        --edit_n_epochs 10 \
-        --edit_cache_batch_size 128 \
-        --edit_early_stop_patience 5 \
-        --edit_eval_every 2
+        --biasedit_k 5 \
+        --biasedit_n_edits 2 \
+        --biasedit_meta_lr 1e-4 \
+        --biasedit_rank 1920 \
+        --biasedit_epochs 10 \
+        --biasedit_cache_batch_size 64 \
+        --biasedit_patience 5 \
+        --biasedit_eval_every 2
 
 done
 

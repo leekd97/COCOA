@@ -1,11 +1,9 @@
 # Experiment results & checkpoints
 experiments/
-analysis/logprob_gap*/
-analysis/figures/
-analysis/ablation/
-analysis/categories/*.json
-analysis/categories/*.png
-analysis/categories/*.pdf
+analysis/**
+!analysis/
+!analysis/**/
+!analysis/**/*.py
 
 # Baseline results
 baselines/results/

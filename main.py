@@ -60,6 +60,15 @@ def parse_args():
                    help="Minimum entities per split per type")
     
     # ==========================================================================
+    # K-Fold CV
+    # ==========================================================================
+    p.add_argument("--fold", type=int, default=None,
+                   help="Fold index (0 to K-1). If set, loads pre-generated fold "
+                        "from --folds_root instead of using split_data().")
+    p.add_argument("--folds_root", type=str, default="./dataset/folds",
+                   help="Root directory for pre-generated fold files")
+    
+    # ==========================================================================
     # Model
     # ==========================================================================
     p.add_argument("--model", type=str, default="llama3_8b",
@@ -211,6 +220,10 @@ def build_exp_name(args) -> str:
     if args.gradient_method != "goal_aware_pcgrad":
         parts.append(args.gradient_method)
     
+    # Fold (if using K-Fold CV)
+    if hasattr(args, "fold") and args.fold is not None:
+        parts.append(f"fold{args.fold}")
+    
     # Seed
     parts.append(f"seed{args.seed}")
     
@@ -236,14 +249,38 @@ def main():
     print("\n[1/4] Loading data...")
     data = load_camellia_data(args.data_root, culture=args.culture, target_lang=args.lang)
     
-    train_examples, val_examples, test_examples, split_info = split_data(
-        data,
-        train_ratio=args.train_ratio,
-        val_ratio=args.val_ratio,
-        seed=args.seed,
-        max_pairs_per_context=args.max_pairs,
-        min_entities_per_split=args.min_entities_per_split,
-    )
+    if args.fold is not None:
+        # ---- K-Fold CV: load pre-generated split ----
+        from src.fold_utils import load_fold, create_examples_from_fold
+        print(f"  Loading fold {args.fold} from {args.folds_root}")
+        split_info = load_fold(args.folds_root, args.culture, args.lang, args.fold)
+        
+        # Create example lists for evaluation (legacy compat)
+        val_examples = create_examples_from_fold(
+            split_info, args.culture, args.lang, "val", args.max_pairs
+        )
+        test_examples = create_examples_from_fold(
+            split_info, args.culture, args.lang, "test", args.max_pairs
+        )
+        train_examples = []  # Not used in paired training
+        
+        for sn in ["train", "val", "test"]:
+            ng = len(split_info[f"grounded_{sn}"])
+            nn = len(split_info[f"neutral_{sn}"])
+            ents = split_info[f"{sn}_entities"]
+            na = sum(len(v["asian"]) for v in ents.values())
+            nw = sum(len(v["western"]) for v in ents.values())
+            print(f"  {sn}: {ng}G + {nn}N contexts, {na}A + {nw}W entities")
+    else:
+        # ---- Legacy: seed-based random split ----
+        train_examples, val_examples, test_examples, split_info = split_data(
+            data,
+            train_ratio=args.train_ratio,
+            val_ratio=args.val_ratio,
+            seed=args.seed,
+            max_pairs_per_context=args.max_pairs,
+            min_entities_per_split=args.min_entities_per_split,
+        )
     
     # =========================================================================
     # 2. Load Model

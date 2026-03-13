@@ -747,7 +747,7 @@ def evaluate_robust_fair(
     # Reverse alias mapping: entity file name -> context entity type names
     REVERSE_ALIAS = {
         "locations": ["location", "locations"],
-        "sports": ["sport", "sports", "sports-clubs"],
+        "sports": ["sport", "sports", "sports-clubs", "sports clubs"],
         "authors": ["author", "authors"],
         "names-male": ["names", "name", "names (m)", "name (m)", "names-male"],
         "names-female": ["names", "name", "names (f)", "name (f)", "names-female"],

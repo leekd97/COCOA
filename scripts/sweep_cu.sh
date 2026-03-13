@@ -1,20 +1,6 @@
 # Usage:
 #   tmux new -s cu 'bash scripts/sweep_cu.sh'
 #!/bin/bash
-# Round 2: Indian Combined — shared cultural training across hi/ml/mr/gu
-# Rationale: Individual Indian languages have ~600 entities + ~50 contexts each.
-#   Pooling 4 languages gives ~200 contexts (4x diversity) with same entity set.
-#   Entity language anchored to Hindi (hi) for consistency.
-#
-# Paper angle: "Low-resource languages benefit from pooling contexts
-#   across linguistically diverse but culturally shared groups"
-#
-# HP: Use Round 1 HP (tuned for low-resource) unless Round 1 suggests otherwise
-#
-# Usage:
-#   tmux new -s r2 'bash scripts/sweep_round2.sh'
-
-
 
 cd "$(dirname "$0")/.."
 
