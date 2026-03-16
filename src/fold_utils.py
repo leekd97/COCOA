@@ -32,6 +32,7 @@ def load_fold(
     culture: str,
     lang: str,
     fold: int,
+    seed: int = 42,
 ) -> Dict:
     """
     Load a pre-generated fold split.
@@ -41,6 +42,7 @@ def load_fold(
         culture: Culture code (e.g., "ko")
         lang: Language code ("cu" or "en")
         fold: Fold index (0 to K-1)
+        seed: Seed used when generating folds
 
     Returns:
         split_info dict with same keys as split_data():
@@ -49,7 +51,7 @@ def load_fold(
             train_entities, val_entities, test_entities (Dicts)
     """
     folds_root = Path(folds_root)
-    fold_dir = folds_root / f"{culture}_{lang}"
+    fold_dir = folds_root / f"seed{seed}" / f"{culture}_{lang}"
     fold_path = fold_dir / f"fold_{fold}.json"
 
     if not fold_path.exists():
@@ -77,9 +79,10 @@ def load_fold_meta(
     folds_root: Union[str, Path],
     culture: str,
     lang: str,
+    seed: int = 42,
 ) -> Dict:
     """Load fold metadata (K, seed, entity counts, etc.)."""
-    meta_path = Path(folds_root) / f"{culture}_{lang}" / "meta.json"
+    meta_path = Path(folds_root) / f"seed{seed}" / f"{culture}_{lang}" / "meta.json"
     if not meta_path.exists():
         raise FileNotFoundError(f"Meta file not found: {meta_path}")
     with open(meta_path, "r") as f:
@@ -140,9 +143,10 @@ def get_available_folds(
     folds_root: Union[str, Path],
     culture: str,
     lang: str,
+    seed: int = 42,
 ) -> List[int]:
     """List available fold indices for a culture/lang."""
-    fold_dir = Path(folds_root) / f"{culture}_{lang}"
+    fold_dir = Path(folds_root) / f"seed{seed}" / f"{culture}_{lang}"
     if not fold_dir.exists():
         return []
     folds = []

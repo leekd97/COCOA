@@ -39,6 +39,7 @@ from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from src.data import load_camellia_data, LANGUAGE_NAME_MAP, LANGUAGE_CODE_MAP
 from src.model import MODEL_SHORTCUTS
 

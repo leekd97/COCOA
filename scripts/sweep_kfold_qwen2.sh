@@ -7,13 +7,13 @@ cd "$(dirname "$0")/.."
 source ~/.bashrc
 conda activate cocoa
 
-GPU=0
-CULTURES=("ko" "ja" "zh" "vi" "ur" "hi" "ml" "mr" "gu" "ar")
-MODEL="llama3_8b"
-MODEL_SHORT="llama3-8b"
+GPU=1
+CULTURES=("hi" "ml" "mr" "gu" "ar")
+MODEL="qwen3_8b"
+MODEL_SHORT="qwen3-8b"
 LANG="cu"
 K=5
-SEED=42  # Fixed seed for training randomness; fold controls data split
+SEED=45  # Controls both fold assignment AND training randomness
 
 W_GROUNDED=1.0
 W_NEUTRAL=2.0
@@ -29,6 +29,12 @@ export CUDA_VISIBLE_DEVICES=$GPU
 OUTPUT="./experiments"
 FOLDS_ROOT="./dataset/folds"
 mkdir -p "$OUTPUT"
+
+# Generate folds if not already done
+if [ ! -d "$FOLDS_ROOT/seed${SEED}" ]; then
+    echo "Generating ${K}-fold splits (seed=${SEED})..."
+    python generate_folds.py --K $K --seed $SEED --lang $LANG --output_root $FOLDS_ROOT
+fi
 
 # Logging
 SWEEP_LOG="$OUTPUT/_sweep_kfold_${MODEL_SHORT}.log"

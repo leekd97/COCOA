@@ -272,7 +272,7 @@ def generate_folds_for_culture(
         print(f"    Fold {k}: {n_g}G + {n_n}N contexts, {n_a}A + {n_w}W entities")
 
     # Assemble and save each fold
-    output_dir = Path(output_root) / f"{culture}_{lang}"
+    output_dir = Path(output_root) / f"seed{seed}" / f"{culture}_{lang}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for fold_idx in range(K):

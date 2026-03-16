@@ -265,8 +265,8 @@ def main():
     if args.fold is not None:
         # ---- K-Fold CV: load pre-generated split ----
         from src.fold_utils import load_fold, create_examples_from_fold
-        print(f"  Loading fold {args.fold} from {args.folds_root}")
-        split_info = load_fold(args.folds_root, args.culture, args.lang, args.fold)
+        print(f"  Loading fold {args.fold} from {args.folds_root}/seed{args.seed}")
+        split_info = load_fold(args.folds_root, args.culture, args.lang, args.fold, args.seed)
         
         # Create example lists for evaluation (legacy compat)
         val_examples = create_examples_from_fold(

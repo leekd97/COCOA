@@ -1,0 +1,49 @@
+{
+  "culture": "ar",
+  "lang": "cu",
+  "K": 5,
+  "seed": 45,
+  "generated_at": "2026-03-13T18:50:07.156987",
+  "data_root": "./dataset/camellia/raw",
+  "n_grounded_contexts": 250,
+  "n_neutral_contexts": 378,
+  "entity_types": [
+    "authors",
+    "beverage",
+    "food",
+    "locations",
+    "names-female",
+    "names-male",
+    "sports"
+  ],
+  "entity_counts": {
+    "authors": {
+      "asian": 207,
+      "western": 339
+    },
+    "beverage": {
+      "asian": 54,
+      "western": 88
+    },
+    "food": {
+      "asian": 326,
+      "western": 251
+    },
+    "locations": {
+      "asian": 1061,
+      "western": 11435
+    },
+    "names-female": {
+      "asian": 537,
+      "western": 424
+    },
+    "names-male": {
+      "asian": 340,
+      "western": 232
+    },
+    "sports": {
+      "asian": 1270,
+      "western": 1230
+    }
+  }
+}
