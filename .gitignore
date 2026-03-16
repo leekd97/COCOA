@@ -8,6 +8,10 @@ analysis/**
 # Baseline results
 baselines/results/
 
+# Data
+dataset/folds
+dataset/priors
+
 # Cache
 __pycache__/
 *.pyc

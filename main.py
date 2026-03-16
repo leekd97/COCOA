@@ -69,6 +69,15 @@ def parse_args():
                    help="Root directory for pre-generated fold files")
     
     # ==========================================================================
+    # Prior Normalization
+    # ==========================================================================
+    p.add_argument("--normalize_prior", action="store_true", default=False,
+                   help="Subtract entity unconditional prior from log probs "
+                        "(requires pre-generated priors from generate_priors.py)")
+    p.add_argument("--priors_root", type=str, default="./dataset/priors",
+                   help="Root directory for pre-generated entity priors")
+    
+    # ==========================================================================
     # Model
     # ==========================================================================
     p.add_argument("--model", type=str, default="llama3_8b",
@@ -220,6 +229,10 @@ def build_exp_name(args) -> str:
     if args.gradient_method != "goal_aware_pcgrad":
         parts.append(args.gradient_method)
     
+    # Prior normalization flag
+    if hasattr(args, "normalize_prior") and args.normalize_prior:
+        parts.append("pnorm")
+    
     # Fold (if using K-Fold CV)
     if hasattr(args, "fold") and args.fold is not None:
         parts.append(f"fold{args.fold}")
@@ -324,7 +337,18 @@ def main():
     )
     
     # =========================================================================
-    # 4. Train
+    # 4. Load Entity Priors (if requested)
+    # =========================================================================
+    entity_priors = None
+    if args.normalize_prior:
+        from src.prior_utils import load_entity_priors
+        entity_priors = load_entity_priors(
+            args.priors_root, args.model, args.culture, args.lang
+        )
+        print(f"  Loaded {len(entity_priors)} entity priors for prior normalization")
+    
+    # =========================================================================
+    # 5. Train
     # =========================================================================
     print("\n[4/4] Starting training...")
     train_config = TrainingConfig(
@@ -363,6 +387,7 @@ def main():
         model, tokenizer, train_dataloader,
         val_examples, test_examples, train_config,
         camellia_data=data, split_info=split_info,
+        entity_priors=entity_priors,
     )
     
     print(f"\nDone! Results saved to: {train_config.output_dir}/{train_config.exp_name}")

@@ -492,6 +492,7 @@ def compute_cbs_for_context_robust(
     device: torch.device,
     max_entities: int = 30,
     batch_size: int = 32,
+    entity_priors=None,
 ) -> Tuple[float, int, int, int]:
     """
     Compute CBS for a single context using N×M comparisons.
@@ -523,7 +524,15 @@ def compute_cbs_for_context_robust(
     western_logprobs = compute_log_probs_for_entities_batched(
         model, tokenizer, context, western_ents, device, batch_size
     )
-    
+    if entity_priors is not None:
+        asian_logprobs = [
+            lp - entity_priors.get(ent, 0.0)
+            for lp, ent in zip(asian_logprobs, asian_ents)
+        ]
+        western_logprobs = [
+            lp - entity_priors.get(ent, 0.0)
+            for lp, ent in zip(western_logprobs, western_ents)
+        ]
     if not asian_logprobs or not western_logprobs:
         return 0.5, 0, 0, 0
     
@@ -558,6 +567,7 @@ def compute_cbs_robust(
     max_entities: int = 30,
     show_progress: bool = True,
     desc: str = "CBS",
+    entity_priors=None,
 ) -> Dict:
     """
     Compute robust CBS using N×M comparisons for all contexts.
@@ -589,7 +599,7 @@ def compute_cbs_robust(
     for context in iterator:
         _, w_wins, a_wins, ties = compute_cbs_for_context_robust(
             model, tokenizer, context, asian_entities, western_entities,
-            device, max_entities
+            device, max_entities, entity_priors=entity_priors,
         )
         total_western += w_wins
         total_asian += a_wins
@@ -726,6 +736,7 @@ def evaluate_robust_fair(
     max_contexts: int = None,
     max_entities: int = 30,
     show_progress: bool = True,
+    entity_priors=None,
 ) -> Dict:
     """
     Fair robust evaluation using only val/test contexts (no train leakage).
@@ -796,7 +807,8 @@ def evaluate_robust_fair(
         result = compute_cbs_robust(
             model, tokenizer, contexts, asian_ents, western_ents,
             device, None, max_entities, show_progress,
-            desc=f"Grounded [{etype}] ({split})"
+            desc=f"Grounded [{etype}] ({split})",
+            entity_priors=entity_priors,
         )
         
         results["grounded"]["by_category"][etype] = result["cbs"]
@@ -838,7 +850,8 @@ def evaluate_robust_fair(
         result = compute_cbs_robust(
             model, tokenizer, contexts, asian_ents, western_ents,
             device, None, max_entities, show_progress,
-            desc=f"Neutral [{etype}] ({split})"
+            desc=f"Neutral [{etype}] ({split})",
+            entity_priors=entity_priors,
         )
         
         results["neutral"]["by_category"][etype] = result["cbs"]

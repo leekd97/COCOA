@@ -297,6 +297,7 @@ class CBMCDTrainer:
         self.test_examples = test_examples
         self.camellia_data = camellia_data
         self.split_info = split_info
+        self.entity_priors = None  # Set externally via set_entity_priors()
         
         from datetime import timedelta
         from accelerate import InitProcessGroupKwargs
@@ -388,7 +389,11 @@ class CBMCDTrainer:
         }
         self.global_step = 0
         self.best_score = float("inf")
-    
+
+    def set_entity_priors(self, priors: Dict[str, float]):
+        self.entity_priors = priors
+        self.log(f"Entity priors loaded: {len(priors)} entities")
+
     def _config_to_dict(self) -> dict:
         return {
             "epochs": self.config.epochs,
@@ -507,6 +512,24 @@ class CBMCDTrainer:
             n_a_ids, n_a_mask, n_w_ids, n_w_mask, n_ctx_ids
         )
         
+        if self.entity_priors is not None:
+            asian_entities = batch["asian_entity"]   # list of strings
+            western_entities = batch["western_entity"]
+            
+            prior_a = torch.tensor(
+                [self.entity_priors.get(e, 0.0) for e in asian_entities],
+                device=self.device, dtype=lp_g_a.dtype
+            )
+            prior_w = torch.tensor(
+                [self.entity_priors.get(e, 0.0) for e in western_entities],
+                device=self.device, dtype=lp_g_w.dtype
+            )
+            
+            # Subtract priors: log P(entity|ctx) - log P(entity|BOS)
+            lp_g_a = lp_g_a - prior_a
+            lp_g_w = lp_g_w - prior_w
+            lp_n_a = lp_n_a - prior_a
+            lp_n_w = lp_n_w - prior_w
         # =====================================================================
         # 3. Update running CBS (EMA)
         # =====================================================================
@@ -610,6 +633,7 @@ class CBMCDTrainer:
             max_contexts=None,
             max_entities=30,
             show_progress=show_progress,
+            entity_priors=self.entity_priors,
         )
         
         cbs_g = results["grounded"]["overall"] if results["grounded"]["overall"] is not None else 50.0
@@ -814,12 +838,13 @@ class CBMCDTrainer:
 # =============================================================================
 
 def train_cbmcd(model, tokenizer, train_dataloader, val_examples, test_examples,
-                config, camellia_data=None, split_info=None):
-    """Main entry point for CBMCD training (v2)."""
+                config, camellia_data=None, split_info=None, entity_priors=None):
     trainer = CBMCDTrainer(
         model, tokenizer, train_dataloader,
         val_examples, test_examples, config,
         camellia_data, split_info,
     )
+    if entity_priors is not None:
+        trainer.set_entity_priors(entity_priors)
     trainer.train()
     return trainer

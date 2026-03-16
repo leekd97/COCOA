@@ -997,6 +997,9 @@ class PairedDataset(Dataset):
             "n_western_input_ids": n_w_ids,
             "n_western_attention_mask": n_w_mask,
             "n_context_input_ids": n_ctx_ids,
+            # Entity strings (for prior lookup)
+            "asian_entity": asian,
+            "western_entity": western,
         }
 
 
