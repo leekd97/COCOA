@@ -1,4 +1,4 @@
-# CBMCD: Cultural Bias Mitigation with Context-Dependent Preference
+# CoCoA: Context-Conditional Cultural Alignment
 
 A framework for mitigating cultural bias in Large Language Models using context-dependent preference learning.
 
