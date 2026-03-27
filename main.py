@@ -76,6 +76,23 @@ def parse_args():
                         "(requires pre-generated priors from generate_priors.py)")
     p.add_argument("--priors_root", type=str, default="./dataset/priors",
                    help="Root directory for pre-generated entity priors")
+    p.add_argument("--prior_alpha_g", type=float, default=1.0,
+                   help="PMI scaling for grounded loss (1.0=full, 0.0=none)")
+    p.add_argument("--prior_alpha_n", type=float, default=1.0,
+                   help="PMI scaling for neutral loss (1.0=full, 0.0=none)")
+    
+    # ==========================================================================
+    # Entity Pairing
+    # ==========================================================================
+    p.add_argument("--pairing", type=str, default="1to1",
+                   choices=["1to1", "nxn", "nxm"],
+                   help="Entity pairing: 1to1 (default), nxn (equal-sided all combos), nxm (all combos)")
+    
+    # ==========================================================================
+    # Experiment Organization
+    # ==========================================================================
+    p.add_argument("--exp_subdir", type=str, default=None,
+                   help="Subdirectory under output_dir (e.g., 'kfold_nxn_scaled')")
     
     # ==========================================================================
     # Model
@@ -229,9 +246,20 @@ def build_exp_name(args) -> str:
     if args.gradient_method != "goal_aware_pcgrad":
         parts.append(args.gradient_method)
     
-    # Prior normalization flag
+    # Prior normalization
     if hasattr(args, "normalize_prior") and args.normalize_prior:
-        parts.append("pnorm")
+        ag = getattr(args, "prior_alpha_g", 1.0)
+        an = getattr(args, "prior_alpha_n", 1.0)
+        if ag == 1.0 and an == 1.0:
+            parts.append("pnorm")
+        elif an == 0.0:
+            parts.append("pnorm-g")
+        else:
+            parts.append(f"pnorm-g{ag}-n{an}")
+    
+    # Entity pairing (only if non-default)
+    if hasattr(args, "pairing") and args.pairing != "1to1":
+        parts.append(args.pairing)
     
     # Fold (if using K-Fold CV)
     if hasattr(args, "fold") and args.fold is not None:
@@ -334,23 +362,33 @@ def main():
         pairs_per_batch=args.pairs_per_batch,
         pairs_per_category=args.pairs_per_category,
         seed=args.seed,
+        pairing=args.pairing,
     )
     
     # =========================================================================
     # 4. Load Entity Priors (if requested)
     # =========================================================================
-    entity_priors = None
+    prior_config = None
     if args.normalize_prior:
         from src.prior_utils import load_entity_priors
         entity_priors = load_entity_priors(
             args.priors_root, args.model, args.culture, args.lang
         )
-        print(f"  Loaded {len(entity_priors)} entity priors for prior normalization")
+        prior_config = {
+            "priors": entity_priors,
+            "alpha_g": args.prior_alpha_g,
+            "alpha_n": args.prior_alpha_n,
+        }
+        print(f"  Prior norm: {len(entity_priors)} entities, α_g={args.prior_alpha_g}, α_n={args.prior_alpha_n}")
     
     # =========================================================================
     # 5. Train
     # =========================================================================
     print("\n[4/4] Starting training...")
+    output_dir = args.output_dir
+    if args.exp_subdir:
+        output_dir = f"{args.output_dir}/{args.exp_subdir}"
+    
     train_config = TrainingConfig(
         epochs=args.epochs,
         learning_rate=args.learning_rate,
@@ -379,7 +417,7 @@ def main():
         log_steps=args.log_steps,
         eval_steps=args.eval_steps,
         save_steps=args.save_steps,
-        output_dir=args.output_dir,
+        output_dir=output_dir,
         exp_name=args.exp_name,
     )
     
@@ -387,7 +425,7 @@ def main():
         model, tokenizer, train_dataloader,
         val_examples, test_examples, train_config,
         camellia_data=data, split_info=split_info,
-        entity_priors=entity_priors,
+        prior_config=prior_config,
     )
     
     print(f"\nDone! Results saved to: {train_config.output_dir}/{train_config.exp_name}")

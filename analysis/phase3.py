@@ -38,8 +38,7 @@ import numpy as np
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
+sys.path.insert(0, str(Path(__file__).parent))
 from src.data import load_camellia_data, LANGUAGE_NAME_MAP, LANGUAGE_CODE_MAP
 from src.model import MODEL_SHORTCUTS
 
@@ -103,6 +102,7 @@ def load_all_culture_entities(
     data_root: str,
     cultures: List[str],
     max_entities_per_side: int = 15,
+    lang: str = "cu",
 ) -> Dict[str, Dict[str, Dict[str, List[str]]]]:
     """
     Load native-language entities for multiple cultures.
@@ -116,7 +116,7 @@ def load_all_culture_entities(
     for culture in cultures:
         LOG.info(f"  Loading entities: {culture}")
         try:
-            data = load_camellia_data(data_root, culture=culture, target_lang="cu")
+            data = load_camellia_data(data_root, culture=culture, target_lang=lang)
             culture_ents = {}
             for cat, ent_dict in data.entities.items():
                 asian = ent_dict["asian"][:max_entities_per_side]
@@ -177,6 +177,7 @@ def measure_in_context_priors(
     data_root: str,
     device: torch.device,
     max_contexts: int = 10,
+    lang: str = "cu",
 ) -> Dict:
     """
     Measure log P(entity|target_culture_context) for entities from ALL cultures.
@@ -184,7 +185,7 @@ def measure_in_context_priors(
     Returns: {entity_culture: {category: {"mean": float, "std": float}}}
     """
     # Load contexts from target culture
-    ctx_data = load_camellia_data(data_root, culture=ctx_culture, target_lang="cu")
+    ctx_data = load_camellia_data(data_root, culture=ctx_culture, target_lang=lang)
 
     results = {}
 
@@ -399,12 +400,12 @@ def print_results(ctx_culture, unconditional, in_context, penalties, all_entitie
 # =========================================================================
 
 def run_single(ctx_culture, model_key, data_root, device_str, output_dir,
-               max_contexts, max_entities):
+               max_contexts, max_entities, lang="cu"):
     model_name = MODEL_SHORTCUTS.get(model_key, model_key)
     model_short = model_key.replace("/", "_")
     device = torch.device(device_str)
 
-    LOG.info(f"Context culture: {ctx_culture}, Model: {model_name}")
+    LOG.info(f"Context culture: {ctx_culture}, Model: {model_name}, Lang: {lang}")
 
     # Load model
     LOG.info(f"Loading model: {model_name}")
@@ -415,10 +416,10 @@ def run_single(ctx_culture, model_key, data_root, device_str, output_dir,
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    # Load entities from ALL cultures (native language)
-    LOG.info("Loading entities from all cultures...")
+    # Load entities from ALL cultures
+    LOG.info(f"Loading entities from all cultures ({lang})...")
     all_entities = load_all_culture_entities(
-        data_root, ALL_CULTURES, max_entities_per_side=max_entities,
+        data_root, ALL_CULTURES, max_entities_per_side=max_entities, lang=lang,
     )
 
     # A. Unconditional priors
@@ -426,10 +427,10 @@ def run_single(ctx_culture, model_key, data_root, device_str, output_dir,
     unconditional = measure_unconditional_priors(model, tokenizer, all_entities, device)
 
     # B. In-context priors
-    LOG.info(f"B. Measuring in-context priors ({ctx_culture} contexts)...")
+    LOG.info(f"B. Measuring in-context priors ({ctx_culture} contexts, {lang})...")
     in_context = measure_in_context_priors(
         model, tokenizer, ctx_culture, all_entities,
-        data_root, device, max_contexts,
+        data_root, device, max_contexts, lang=lang,
     )
 
     # C. Context penalty
@@ -456,7 +457,7 @@ def run_single(ctx_culture, model_key, data_root, device_str, output_dir,
     if output_dir:
         out_path = Path(output_dir)
         out_path.mkdir(parents=True, exist_ok=True)
-        fname = out_path / f"phase3_{ctx_culture}_{model_short}.json"
+        fname = out_path / f"phase3_{ctx_culture}_{lang}_{model_short}.json"
         with open(fname, "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False, default=str)
         LOG.info(f"Saved: {fname}")
@@ -477,13 +478,15 @@ def main():
     parser.add_argument("--output_dir", default="./analysis/phase3")
     parser.add_argument("--max_contexts", type=int, default=10)
     parser.add_argument("--max_entities", type=int, default=15)
+    parser.add_argument("--lang", default="cu", choices=["cu", "en"],
+                        help="Language for contexts and entities (cu=native, en=English)")
     args = parser.parse_args()
 
     for ctx_culture in args.ctx_culture:
         run_single(
             ctx_culture, args.model, args.data_root,
             args.device, args.output_dir,
-            args.max_contexts, args.max_entities,
+            args.max_contexts, args.max_entities, args.lang,
         )
 
 

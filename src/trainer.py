@@ -297,7 +297,9 @@ class CBMCDTrainer:
         self.test_examples = test_examples
         self.camellia_data = camellia_data
         self.split_info = split_info
-        self.entity_priors = None  # Set externally via set_entity_priors()
+        self.entity_priors = None  # Set externally via set_prior_config()
+        self.prior_alpha_g = 1.0
+        self.prior_alpha_n = 1.0
         
         from datetime import timedelta
         from accelerate import InitProcessGroupKwargs
@@ -390,9 +392,17 @@ class CBMCDTrainer:
         self.global_step = 0
         self.best_score = float("inf")
 
+    def set_prior_config(self, prior_config: Dict):
+        """Set entity priors and per-loss alpha scaling."""
+        self.entity_priors = prior_config["priors"]
+        self.prior_alpha_g = prior_config.get("alpha_g", 1.0)
+        self.prior_alpha_n = prior_config.get("alpha_n", 1.0)
+        self.log(f"Prior norm: {len(self.entity_priors)} entities, "
+                 f"α_g={self.prior_alpha_g}, α_n={self.prior_alpha_n}")
+    
     def set_entity_priors(self, priors: Dict[str, float]):
-        self.entity_priors = priors
-        self.log(f"Entity priors loaded: {len(priors)} entities")
+        """Backward compat."""
+        self.set_prior_config({"priors": priors, "alpha_g": 1.0, "alpha_n": 1.0})
 
     def _config_to_dict(self) -> dict:
         return {
@@ -525,11 +535,12 @@ class CBMCDTrainer:
                 device=self.device, dtype=lp_g_w.dtype
             )
             
-            # Subtract priors: log P(entity|ctx) - log P(entity|BOS)
-            lp_g_a = lp_g_a - prior_a
-            lp_g_w = lp_g_w - prior_w
-            lp_n_a = lp_n_a - prior_a
-            lp_n_w = lp_n_w - prior_w
+            # Grounded: scale by alpha_g
+            lp_g_a = lp_g_a - self.prior_alpha_g * prior_a
+            lp_g_w = lp_g_w - self.prior_alpha_g * prior_w
+            # Neutral: scale by alpha_n (0.0 = no PMI on neutral)
+            lp_n_a = lp_n_a - self.prior_alpha_n * prior_a
+            lp_n_w = lp_n_w - self.prior_alpha_n * prior_w
         # =====================================================================
         # 3. Update running CBS (EMA)
         # =====================================================================
@@ -838,13 +849,16 @@ class CBMCDTrainer:
 # =============================================================================
 
 def train_cbmcd(model, tokenizer, train_dataloader, val_examples, test_examples,
-                config, camellia_data=None, split_info=None, entity_priors=None):
+                config, camellia_data=None, split_info=None,
+                entity_priors=None, prior_config=None):
     trainer = CBMCDTrainer(
         model, tokenizer, train_dataloader,
         val_examples, test_examples, config,
         camellia_data, split_info,
     )
-    if entity_priors is not None:
+    if prior_config is not None:
+        trainer.set_prior_config(prior_config)
+    elif entity_priors is not None:
         trainer.set_entity_priors(entity_priors)
     trainer.train()
     return trainer

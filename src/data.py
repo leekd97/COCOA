@@ -918,6 +918,7 @@ class PairedDataset(Dataset):
         pairs_per_category: int = 200,
         max_length: int = 128,
         seed: int = 42,
+        pairing: str = "1to1",
     ):
         self.category_data = category_data
         self.tokenizer = tokenizer
@@ -930,19 +931,39 @@ class PairedDataset(Dataset):
         for cat_key, cdata in category_data.items():
             n_asian = len(cdata.asian_entities)
             n_western = len(cdata.western_entities)
-            n_pairs = min(n_asian, n_western, pairs_per_category)
             
-            asian_indices = list(range(n_asian))
-            western_indices = list(range(n_western))
-            rng.shuffle(asian_indices)
-            rng.shuffle(western_indices)
-            
-            for i in range(n_pairs):
-                self.pairs.append((
-                    cat_key,
-                    asian_indices[i % n_asian],
-                    western_indices[i % n_western],
-                ))
+            if pairing == "nxm":
+                # All N×M combinations (shuffled, capped)
+                all_pairs = [(a, w) for a in range(n_asian) for w in range(n_western)]
+                rng.shuffle(all_pairs)
+                for a_idx, w_idx in all_pairs[:pairs_per_category]:
+                    self.pairs.append((cat_key, a_idx, w_idx))
+            elif pairing == "nxn":
+                # N×N: equal-sized sides, all combinations
+                N = min(n_asian, n_western)
+                asian_indices = list(range(n_asian))
+                western_indices = list(range(n_western))
+                rng.shuffle(asian_indices)
+                rng.shuffle(western_indices)
+                selected_a = asian_indices[:N]
+                selected_w = western_indices[:N]
+                all_pairs = [(a, w) for a in selected_a for w in selected_w]
+                rng.shuffle(all_pairs)
+                for a_idx, w_idx in all_pairs[:pairs_per_category]:
+                    self.pairs.append((cat_key, a_idx, w_idx))
+            else:
+                # Original 1:1 pairing
+                n_pairs = min(n_asian, n_western, pairs_per_category)
+                asian_indices = list(range(n_asian))
+                western_indices = list(range(n_western))
+                rng.shuffle(asian_indices)
+                rng.shuffle(western_indices)
+                for i in range(n_pairs):
+                    self.pairs.append((
+                        cat_key,
+                        asian_indices[i % n_asian],
+                        western_indices[i % n_western],
+                    ))
         
         rng.shuffle(self.pairs)
     
@@ -1076,16 +1097,17 @@ def create_paired_dataloader(
     max_length: int = 128,
     seed: int = 42,
     num_workers: int = 4,
+    pairing: str = "1to1",
 ) -> DataLoader:
     """Create paired context dataloader."""
     cat_data = build_category_data(grounded_df, neutral_df, entities)
     
-    print(f"\nPaired Dataset (per category):")
+    print(f"\nPaired Dataset (per category, pairing={pairing}):")
     for cat_key, cdata in cat_data.items():
         print(f"  {cat_key}: {len(cdata.grounded_contexts)}G × {len(cdata.neutral_contexts)}N "
               f"× {len(cdata.asian_entities)}A × {len(cdata.western_entities)}W")
     
-    dataset = PairedDataset(cat_data, tokenizer, pairs_per_category, max_length, seed)
+    dataset = PairedDataset(cat_data, tokenizer, pairs_per_category, max_length, seed, pairing)
     sampler = PairedBatchSampler(dataset, pairs_per_batch, seed)
     
     print(f"  Total pairs: {len(dataset)}, batches: {len(sampler)} "

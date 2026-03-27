@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """
-CBMCD Experiment Results Summary
+CoCoA Experiment Results Summary
 
 Usage:
-    python summarize_results.py [experiments_dir]
-    python summarize_results.py ./experiments
+    # Specific subdirectory
+    python summarize.py experiments/kfold_std
+    python summarize.py experiments/kfold_nxm
+
+    # All subdirectories at once
+    python summarize.py experiments/ --all
+
+    # List available subdirectories
+    python summarize.py experiments/ --list
 
 Outputs:
-    {experiments_dir}/summary.txt   — human-readable summary
-    {experiments_dir}/summary.json  — structured data for analysis
+    {target_dir}/summary.txt   — human-readable summary
+    {target_dir}/summary.json  — structured data for analysis
 """
 
 import re
@@ -122,14 +129,11 @@ def ind_n(v):
 
 
 class TeeWriter:
-    """Write to both stdout and a StringIO buffer."""
     def __init__(self):
         self.buffer = StringIO()
     
     def print(self, *args, **kwargs):
-        # Print to stdout
         print(*args, **kwargs)
-        # Also capture to buffer
         print(*args, **kwargs, file=self.buffer)
     
     def get_text(self):
@@ -137,9 +141,6 @@ class TeeWriter:
 
 
 def build_json_output(results, groups, by_culture_model, sorted_keys):
-    """Build structured JSON output for machine consumption."""
-    
-    # All experiments
     experiments = []
     for r in results:
         experiments.append({
@@ -171,7 +172,6 @@ def build_json_output(results, groups, by_culture_model, sorted_keys):
             },
         })
     
-    # Grouped averages
     grouped = []
     for key, group in groups.items():
         culture, lang, model, wg, wn = key
@@ -181,9 +181,7 @@ def build_json_output(results, groups, by_culture_model, sorted_keys):
         n = len(scores)
         grouped.append({
             "setting": f"{culture}_{lang}_{model}_wg{wg}_wn{wn}",
-            "culture": culture,
-            "lang": lang,
-            "model": model,
+            "culture": culture, "lang": lang, "model": model,
             "n_seeds": n,
             "score": {"mean": round(statistics.mean(scores), 2),
                       "std": round(statistics.stdev(scores), 2) if n > 1 else 0},
@@ -194,7 +192,6 @@ def build_json_output(results, groups, by_culture_model, sorted_keys):
         })
     grouped.sort(key=lambda x: x["score"]["mean"])
     
-    # Per culture × model top 3
     rankings = {}
     for (culture, model) in sorted_keys:
         group = by_culture_model[(culture, model)]
@@ -225,18 +222,13 @@ def build_json_output(results, groups, by_culture_model, sorted_keys):
     }
 
 
-def main():
-    exp_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("./")
-    
-    if not exp_dir.exists():
-        print(f"Directory not found: {exp_dir}")
-        sys.exit(1)
-    
+def summarize_dir(exp_dir):
+    """Run summary on a single directory."""
     logs = sorted(exp_dir.rglob("train.log"))
     
     if not logs:
-        print(f"No train.log files found in {exp_dir}")
-        sys.exit(1)
+        print(f"  No train.log files in {exp_dir}")
+        return None
     
     results = []
     for log_path in logs:
@@ -245,11 +237,10 @@ def main():
             r.update(parse_exp_name(log_path.parent.name))
             results.append(r)
         except Exception as e:
-            print(f"Error parsing {log_path}: {e}")
+            print(f"  Error parsing {log_path}: {e}")
     
     results.sort(key=lambda x: get_score(x))
     
-    # Pre-compute groupings (shared by txt and json)
     groups = defaultdict(list)
     for r in results:
         key = (r.get("culture", "?"), r.get("lang", "?"), r.get("model", "?"),
@@ -261,25 +252,19 @@ def main():
         key = (r.get("culture", "?"), r.get("model", "?"))
         by_culture_model[key].append(r)
     
-    culture_order = ["ko", "ja", "zh", "hi", "ml", "mr", "gu", "vi", "ur"]
+    culture_order = ["ko", "ja", "zh", "hi", "ml", "mr", "gu", "vi", "ur", "ar"]
     sorted_keys = sorted(
         by_culture_model.keys(),
         key=lambda k: (
-            culture_order.index(k[0]) if k[0] in culture_order else 999,
-            k[1]
+            culture_order.index(k[0]) if k[0] in culture_order else 999, k[1]
         )
     )
     
-    # Use TeeWriter to capture output for txt file
     out = TeeWriter()
-    
     W = 140
     
-    # =============================================
-    # Full Summary Table
-    # =============================================
     out.print("=" * W)
-    out.print("CBMCD Experiment Results Summary")
+    out.print(f"CoCoA Experiment Results Summary — {exp_dir.name}")
     out.print(f"Directory: {exp_dir}")
     out.print(f"Total experiments: {len(results)}")
     out.print(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -293,25 +278,20 @@ def main():
         name = r.get("path", "?")
         if len(name) > 58:
             name = name[:55] + "..."
-        
         base_s = r.get("base_score", 0)
         final_s = get_score(r)
         delta = final_s - base_s
         final_g = get_g(r)
         final_n = get_n(r)
         best_step = r.get("best_val_step", -1)
-        
         out.print(f"{name:<60} {base_s:>10.1f} {final_s:>10.1f} {delta:>+6.1f} "
                   f"{final_g:>7.1f}% {ind_g(final_g):>3} {final_n:>7.1f}% {ind_n(final_n):>3} {best_step:>6}")
     
-    # =============================================
-    # Grouped by Setting
-    # =============================================
     out.print(f"\n{'=' * W}")
-    out.print("Grouped by Setting (averaged over seeds)")
+    out.print("Grouped by Setting (averaged over seeds/folds)")
     out.print("=" * W)
     
-    out.print(f"\n{'Setting':<50} {'Seeds':>5} {'Score':>12} {'CBS_g':>12} {'CBS_n':>12}")
+    out.print(f"\n{'Setting':<50} {'N':>5} {'Score':>12} {'CBS_g':>12} {'CBS_n':>12}")
     out.print(f"{'':50} {'':>5} {'mean±std':>12} {'mean±std':>12} {'mean±std':>12}")
     out.print("-" * 100)
     
@@ -336,9 +316,6 @@ def main():
             label = label[:45] + "..."
         out.print(f"{label:<50} {n:>5} {s_mean:>6.1f}±{s_std:<4.1f} {g_mean:>6.1f}±{g_std:<4.1f} {n_mean:>6.1f}±{n_std:<4.1f}")
     
-    # =============================================
-    # Per Culture × Model: Top 3
-    # =============================================
     out.print(f"\n{'=' * W}")
     out.print("Per Culture × Model: Top 3 for Score / CBS_g / CBS_n")
     out.print("=" * W)
@@ -351,15 +328,13 @@ def main():
         out.print(f"  [{culture.upper()}] {model}  ({len(group)} runs, lang={','.join(langs)})")
         out.print(f"{'━' * W}")
         
-        # --- Top 3 by Final Score ---
         sorted_by_score = sorted(group, key=lambda x: get_score(x))
         out.print(f"\n    📊 Final Score Top 3 (→ 0)")
         out.print(f"    {'#':<4} {'Experiment':<72} {'Score (base→final)':>20} {'CBS_g (base→final)':>22} {'CBS_n (base→final)':>22}")
         out.print(f"    {'─' * (W - 8)}")
         for i, r in enumerate(sorted_by_score[:3]):
             name = r.get("path", "?")
-            if len(name) > 70:
-                name = name[:67] + "..."
+            if len(name) > 70: name = name[:67] + "..."
             base_s = r.get("base_score", 0)
             base_g = r.get("base_g", -1)
             base_n = r.get("base_n", -1)
@@ -367,15 +342,13 @@ def main():
                       f"     {base_g:>5.1f}% → {get_g(r):<5.1f}% {ind_g(get_g(r))}"
                       f"    {base_n:>5.1f}% → {get_n(r):<5.1f}% {ind_n(get_n(r))}")
         
-        # --- Top 3 by CBS_g ---
         sorted_by_g = sorted(group, key=lambda x: get_g(x))
         out.print(f"\n    🎯 CBS_g Top 3 (→ 0%)")
         out.print(f"    {'#':<4} {'Experiment':<72} {'CBS_g (base→final)':>22} {'CBS_n (base→final)':>22} {'Score (base→final)':>20}")
         out.print(f"    {'─' * (W - 8)}")
         for i, r in enumerate(sorted_by_g[:3]):
             name = r.get("path", "?")
-            if len(name) > 70:
-                name = name[:67] + "..."
+            if len(name) > 70: name = name[:67] + "..."
             base_s = r.get("base_score", 0)
             base_g = r.get("base_g", -1)
             base_n = r.get("base_n", -1)
@@ -383,15 +356,13 @@ def main():
                       f"    {base_n:>5.1f}% → {get_n(r):<5.1f}% {ind_n(get_n(r))}"
                       f"   {base_s:>6.1f} → {get_score(r):<6.1f}")
         
-        # --- Top 3 by CBS_n ---
         sorted_by_n = sorted(group, key=lambda x: abs(get_n(x) - 50))
         out.print(f"\n    ⚖️  CBS_n Top 3 (→ 50%)")
         out.print(f"    {'#':<4} {'Experiment':<72} {'CBS_n (base→final)':>22} {'CBS_g (base→final)':>22} {'Score (base→final)':>20}")
         out.print(f"    {'─' * (W - 8)}")
         for i, r in enumerate(sorted_by_n[:3]):
             name = r.get("path", "?")
-            if len(name) > 70:
-                name = name[:67] + "..."
+            if len(name) > 70: name = name[:67] + "..."
             base_s = r.get("base_score", 0)
             base_g = r.get("base_g", -1)
             base_n = r.get("base_n", -1)
@@ -399,23 +370,59 @@ def main():
                       f"    {base_g:>5.1f}% → {get_g(r):<5.1f}% {ind_g(get_g(r))}"
                       f"   {base_s:>6.1f} → {get_score(r):<6.1f}")
     
-    # =============================================
-    # Save outputs
-    # =============================================
-    
-    # Save TXT
+    # Save
     txt_path = exp_dir / "summary.txt"
     txt_path.write_text(out.get_text(), encoding="utf-8")
     
-    # Save JSON
     json_data = build_json_output(results, groups, by_culture_model, sorted_keys)
     json_path = exp_dir / "summary.json"
     json_path.write_text(json.dumps(json_data, indent=2, ensure_ascii=False), encoding="utf-8")
     
-    print(f"\n{'=' * W}")
-    print(f"📁 Saved: {txt_path}")
-    print(f"📁 Saved: {json_path}")
-    print(f"{'=' * W}")
+    print(f"\n  📁 Saved: {txt_path}")
+    print(f"  📁 Saved: {json_path}")
+    
+    return json_data
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("  python summarize.py experiments/kfold_nxm       # specific subdir")
+        print("  python summarize.py experiments/ --all           # all subdirs")
+        print("  python summarize.py experiments/ --list          # list subdirs")
+        sys.exit(1)
+    
+    exp_dir = Path(sys.argv[1])
+    
+    if not exp_dir.exists():
+        print(f"Directory not found: {exp_dir}")
+        sys.exit(1)
+    
+    # --list: show available subdirectories
+    if "--list" in sys.argv:
+        print(f"Subdirectories in {exp_dir}:")
+        for d in sorted(exp_dir.iterdir()):
+            if d.is_dir():
+                n_logs = len(list(d.rglob("train.log")))
+                if n_logs > 0:
+                    print(f"  {d.name:<30} ({n_logs} experiments)")
+        sys.exit(0)
+    
+    # --all: summarize each subdirectory separately
+    if "--all" in sys.argv:
+        subdirs = sorted([d for d in exp_dir.iterdir() if d.is_dir()])
+        for subdir in subdirs:
+            n_logs = len(list(subdir.rglob("train.log")))
+            if n_logs == 0:
+                continue
+            print(f"\n{'='*80}")
+            print(f"  Summarizing: {subdir.name} ({n_logs} experiments)")
+            print(f"{'='*80}")
+            summarize_dir(subdir)
+        print(f"\nDone! Summarized {len(subdirs)} subdirectories.")
+    else:
+        # Single directory
+        summarize_dir(exp_dir)
 
 
 if __name__ == "__main__":

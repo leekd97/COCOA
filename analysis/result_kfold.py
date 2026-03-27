@@ -106,6 +106,8 @@ def main():
     parser.add_argument("--seed", default=None, help="Filter by seed")
     parser.add_argument("--model", default=None, help="llama or qwen")
     parser.add_argument("--lang", default="cu")
+    parser.add_argument("--pnorm", action="store_true", default=False,
+                        help="Only include pnorm experiments (or exclude if not set)")
     parser.add_argument("--output", default=None)
     args = parser.parse_args()
 
@@ -120,6 +122,12 @@ def main():
             continue
         parsed = parse_fold_folder(folder.name)
         if not parsed:
+            continue
+        # Filter pnorm vs standard
+        is_pnorm = "pnorm" in folder.name
+        if args.pnorm and not is_pnorm:
+            continue
+        if not args.pnorm and is_pnorm:
             continue
         if args.seed and parsed["seed"] != args.seed:
             continue
