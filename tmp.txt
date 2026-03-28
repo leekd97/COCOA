@@ -1,0 +1,7 @@
+export CUDA_VISIBLE_DEVICES=2 python comparepnorm.py \
+    --model llama3_8b --lang cu --device cuda:0 \
+    --output analysis/pnorm/pnorm_compare_llama.json
+
+export CUDA_VISIBLE_DEVICES=3 python comparepnorm.py \
+    --model qwen3_8b --lang cu --device cuda:0 \
+    --output analysis/pnorm/pnorm_compare_qwen.json
