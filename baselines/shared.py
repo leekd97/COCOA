@@ -24,6 +24,38 @@ from src.model import MODEL_SHORTCUTS
 
 LOG = logging.getLogger(__name__)
 
+
+# =============================================================================
+# Data Loading
+# =============================================================================
+
+def load_and_split_kfold(
+    data_root: str,
+    culture: str,
+    lang: str,
+    seed: int,
+    fold: int,
+    folds_root: str = "./dataset/folds",
+) -> Tuple[CamelliaData, Dict]:
+    """
+    Load Camellia data with K-Fold split (same as CoCoA).
+    """
+    from src.fold_utils import load_fold
+    
+    LOG.info(f"Loading data: culture={culture}, lang={lang}, fold={fold}, seed={seed}")
+    data = load_camellia_data(data_root, culture=culture, target_lang=lang)
+    split_info = load_fold(folds_root, culture, lang, fold, seed)
+    
+    for split_name in ["train", "val", "test"]:
+        n_g = len(split_info[f"grounded_{split_name}"])
+        n_n = len(split_info[f"neutral_{split_name}"])
+        ents = split_info[f"{split_name}_entities"]
+        n_a = sum(len(v["asian"]) for v in ents.values())
+        n_w = sum(len(v["western"]) for v in ents.values())
+        LOG.info(f"  {split_name}: {n_g}G + {n_n}N contexts, {n_a}A + {n_w}W entities")
+    
+    return data, split_info
+
 # Consistent short names for experiment naming
 MODEL_SHORT = {
     "llama3_8b": "llama3-8b",
@@ -33,7 +65,9 @@ MODEL_SHORT = {
     "qwen25_7b": "qwen25-7b",
     "Qwen/Qwen2.5-7B": "qwen25-7b",
     "gemma3_12b": "gemma3-12b",
-    "google/gemma-2-9b": "gemma3-12b",
+    "google/gemma-3-12b-pt": "gemma3-12b",
+    "aya_8b": "aya-8b",
+    "CohereForAI/aya-expanse-8b": "aya-8b",
 }
 
 
@@ -86,10 +120,14 @@ def evaluate_baseline(
     split: str = "test",
     max_entities: int = 30,
     show_progress: bool = True,
+    entity_priors: Dict = None,
 ) -> Dict:
     """
     Evaluate CBS_g and CBS_n using COCOA's evaluate_robust_fair.
     Identical function for all methods → identical baseline scores guaranteed.
+    
+    Args:
+        entity_priors: If provided, applies PMI normalization (same as CoCoA eval).
     """
     entities = split_info[f"{split}_entities"]
     device = next(model.parameters()).device
@@ -105,6 +143,7 @@ def evaluate_baseline(
             split=split,
             max_entities=max_entities,
             show_progress=show_progress,
+            entity_priors=entity_priors,
         )
     
     cbs_g = results["grounded"]["overall"] or 0.0

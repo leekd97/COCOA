@@ -235,6 +235,7 @@ class BiasUnlearnTrainer:
         anti_loader: DataLoader,
         unrelated_loader: DataLoader,
         split_info: Dict,
+        entity_priors: Dict = None,
     ) -> Dict:
         """
         Full training loop with CBS monitoring.
@@ -253,7 +254,8 @@ class BiasUnlearnTrainer:
         # Baseline evaluation
         # =================================================================
         LOG.info("Evaluating baseline (before training)...")
-        base_result = evaluate_baseline(model, self.tokenizer, split_info, split="test")
+        base_result = evaluate_baseline(model, self.tokenizer, split_info, split="test",
+                                         entity_priors=entity_priors)
         LOG.info(f"Baseline — CBS_g: {base_result['cbs_g']:.1f}%, "
                  f"CBS_n: {base_result['cbs_n']:.1f}%, Score: {base_result['score']:.1f}")
         
@@ -330,7 +332,7 @@ class BiasUnlearnTrainer:
             if config.eval_every > 0 and global_step % config.eval_every == 0:
                 eval_result = evaluate_baseline(
                     model, self.tokenizer, split_info, split="val",
-                    show_progress=False,
+                    show_progress=False, entity_priors=entity_priors,
                 )
                 
                 cbs_n = eval_result["cbs_n"]
@@ -383,7 +385,8 @@ class BiasUnlearnTrainer:
             LOG.info(f"Loaded best checkpoint (score={best_score:.1f})")
         
         LOG.info("\nFinal evaluation (test split)...")
-        trained_result = evaluate_baseline(model, self.tokenizer, split_info, split="test")
+        trained_result = evaluate_baseline(model, self.tokenizer, split_info, split="test",
+                                              entity_priors=entity_priors)
         
         print_comparison(base_result, trained_result, "BiasUnlearn (NPO+GD+KL)")
         

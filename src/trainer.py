@@ -61,6 +61,7 @@ class TrainingConfig:
     npo_min_weight: float = 0.05    # Min weight threshold near CBS=50
     mse_scale: float = 10.0         # For mse/huber
     huber_delta: float = 5.0        # For huber
+    w_drift: float = 0.0            # Neutral drift regularization (0 = off)
     
     # --- Gradient Method ---
     gradient_method: str = "goal_aware_pcgrad"  # goal_aware_pcgrad | pcgrad | weighted
@@ -311,11 +312,12 @@ class CBMCDTrainer:
         )
         
         # =============================================================================
-        # Reference Model (for NPO, not KL)
+        # Reference Model (for NPO or drift regularization)
         # =============================================================================
         self.ref_model = None
-        if config.neutral_loss_type == "npo":
-            self.log_init("Creating reference model for NPO...")
+        if config.neutral_loss_type == "npo" or config.w_drift > 0:
+            reason = "NPO" if config.neutral_loss_type == "npo" else "drift reg"
+            self.log_init(f"Creating reference model for {reason}...")
             self.ref_model = copy.deepcopy(model)
             self.ref_model.eval()
             for param in self.ref_model.parameters():
@@ -574,10 +576,30 @@ class CBMCDTrainer:
             loss_n = self.neutral_loss_fn(lp_n_a, lp_n_w)
         
         # =====================================================================
+        # 5b. Drift Regularization: penalize neutral gap diverging from ref
+        # =====================================================================
+        loss_drift = torch.tensor(0.0, device=self.device)
+        if self.config.w_drift > 0 and self.ref_model is not None:
+            if not self.is_npo:  # NPO already computed ref above
+                ref_lp_n_a, ref_lp_n_w = self.compute_log_probs_paired(
+                    n_a_ids, n_a_mask, n_w_ids, n_w_mask, n_ctx_ids,
+                    use_ref=True,
+                )
+            # Apply same prior scaling as training
+            if self.entity_priors is not None:
+                ref_lp_n_a = ref_lp_n_a - self.prior_alpha_n * prior_a
+                ref_lp_n_w = ref_lp_n_w - self.prior_alpha_n * prior_w
+            
+            current_gap = lp_n_a - lp_n_w
+            ref_gap = ref_lp_n_a - ref_lp_n_w
+            drift = (current_gap - ref_gap) / self.config.mse_scale
+            loss_drift = (drift ** 2).mean()
+        
+        # =====================================================================
         # 6. Scale & Backward (PCGrad)
         # =====================================================================
         scaled_g = self.config.w_grounded * loss_g
-        scaled_n = self.config.w_neutral * loss_n
+        scaled_n = self.config.w_neutral * loss_n + self.config.w_drift * loss_drift
         
         if self.config.gradient_method == "goal_aware_pcgrad":
             stats = goal_aware_pcgrad_backward(
@@ -604,6 +626,7 @@ class CBMCDTrainer:
         return {
             "loss_g": loss_g.item(),
             "loss_n": loss_n.item(),
+            "loss_drift": loss_drift.item() if isinstance(loss_drift, torch.Tensor) else 0.0,
             "cbs_g_ema": self.running_cbs_g,
             "cbs_n_ema": self.running_cbs_n,
             "lr": self.scheduler.get_last_lr()[0],
@@ -733,6 +756,8 @@ class CBMCDTrainer:
                         "cbs_g": f"{m['cbs_g_ema']:.1f}",
                         "cbs_n": f"{m['cbs_n_ema']:.1f}",
                     }
+                    if m.get("loss_drift", 0) > 0:
+                        postfix["Ld"] = f"{m['loss_drift']:.3f}"
                     if "conflict_ratio" in m:
                         postfix["conf"] = f"{m['conflict_ratio']:.2f}"
                     pbar.set_postfix(**postfix)
@@ -745,6 +770,8 @@ class CBMCDTrainer:
                         f"cbs_g={m['cbs_g_ema']:.1f}%",
                         f"cbs_n={m['cbs_n_ema']:.1f}%",
                     ]
+                    if m.get("loss_drift", 0) > 0:
+                        parts.append(f"L_d={m['loss_drift']:.4f}")
                     if "conflict_ratio" in m:
                         parts.append(f"conf={m['conflict_ratio']:.2f}")
                     if "npo_bias_direction" in m:

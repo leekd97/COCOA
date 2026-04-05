@@ -190,8 +190,8 @@ class BiasEditEditor:
         
         self.opt = torch.optim.Adam(self.net.parameters(), config.meta_lr)
         
-        # Cache directory
-        self.cache_dir = os.path.join("cache", "biasedit")
+        # Cache directory (unique per process to avoid collision)
+        self.cache_dir = os.path.join("cache", f"biasedit_{os.getpid()}")
         os.makedirs(self.cache_dir, exist_ok=True)
     
     # =========================================================================
@@ -391,6 +391,7 @@ class BiasEditEditor:
         train_loader: DataLoader,
         split_info: Dict,
         n_epochs: Optional[int] = None,
+        entity_priors: Dict = None,
     ) -> Dict:
         """
         Full training loop with COCOA evaluation.
@@ -407,7 +408,8 @@ class BiasEditEditor:
         # =====================================================================
         LOG.info("Evaluating baseline (before training)...")
         base_result = evaluate_baseline(
-            self.model, self.tokenizer, split_info, split="test"
+            self.model, self.tokenizer, split_info, split="test",
+            entity_priors=entity_priors,
         )
         LOG.info(f"Baseline — CBS_g: {base_result['cbs_g']:.1f}%, "
                  f"CBS_n: {base_result['cbs_n']:.1f}%, Score: {base_result['score']:.1f}")
@@ -437,7 +439,7 @@ class BiasEditEditor:
                 
                 eval_result = evaluate_baseline(
                     self.model, self.tokenizer, split_info, split="val",
-                    show_progress=False,
+                    show_progress=False, entity_priors=entity_priors,
                 )
                 
                 self.edit_model(param_shifts, True)
@@ -483,13 +485,19 @@ class BiasEditEditor:
         
         LOG.info("\nFinal evaluation (test split)...")
         trained_result = evaluate_baseline(
-            self.model, self.tokenizer, split_info, split="test"
+            self.model, self.tokenizer, split_info, split="test",
+            entity_priors=entity_priors,
         )
         
         # Reverse for clean state
         self.edit_model(param_shifts, True)
         
         print_comparison(base_result, trained_result, "BiasEdit (MALMEN)")
+        
+        # Cleanup cache directory
+        import shutil
+        if os.path.exists(self.cache_dir):
+            shutil.rmtree(self.cache_dir)
         
         return {
             "base": base_result,

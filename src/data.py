@@ -1098,9 +1098,17 @@ def create_paired_dataloader(
     seed: int = 42,
     num_workers: int = 4,
     pairing: str = "1to1",
+    category_data_override: Dict = None,
 ) -> DataLoader:
-    """Create paired context dataloader."""
-    cat_data = build_category_data(grounded_df, neutral_df, entities)
+    """Create paired context dataloader.
+    
+    If category_data_override is provided, uses it directly (for bilingual etc).
+    Otherwise builds from grounded_df/neutral_df/entities as before.
+    """
+    if category_data_override is not None:
+        cat_data = category_data_override
+    else:
+        cat_data = build_category_data(grounded_df, neutral_df, entities)
     
     print(f"\nPaired Dataset (per category, pairing={pairing}):")
     for cat_key, cdata in cat_data.items():

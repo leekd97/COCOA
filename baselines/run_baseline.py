@@ -24,7 +24,7 @@ BASELINES_DIR = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from baselines.shared import (
-    load_and_split, save_results, resolve_model_name,
+    load_and_split, load_and_split_kfold, save_results, resolve_model_name,
     build_biasedit_exp_name, build_biasunlearn_exp_name,
 )
 from src.model import MODEL_SHORTCUTS, MODEL_NUM_LAYERS
@@ -40,7 +40,7 @@ LOG = logging.getLogger(__name__)
 # BiasEdit
 # =============================================================================
 
-def run_biasedit(args, split_info):
+def run_biasedit(args, split_info, entity_priors=None):
     from baselines.biasedit.data_adapter import BiasEditDataset
     from baselines.biasedit.editor import BiasEditEditor, BiasEditConfig
     
@@ -92,7 +92,7 @@ def run_biasedit(args, split_info):
     )
     
     editor = BiasEditEditor(model, tokenizer, config)
-    results = editor.run(train_loader, split_info)
+    results = editor.run(train_loader, split_info, entity_priors=entity_priors)
     return results, config
 
 
@@ -100,7 +100,7 @@ def run_biasedit(args, split_info):
 # BiasUnlearn
 # =============================================================================
 
-def run_biasunlearn(args, split_info):
+def run_biasunlearn(args, split_info, entity_priors=None):
     from baselines.biasunlearn.data_adapter import create_unlearn_dataloaders
     from baselines.biasunlearn.trainer import BiasUnlearnTrainer, BiasUnlearnConfig
     from peft import LoraConfig as PeftLoraConfig, get_peft_model, TaskType
@@ -182,7 +182,8 @@ def run_biasunlearn(args, split_info):
     )
     
     trainer = BiasUnlearnTrainer(model, ref_model, tokenizer, config, device)
-    results = trainer.run(ster_loader, anti_loader, unrelated_loader, split_info)
+    results = trainer.run(ster_loader, anti_loader, unrelated_loader, split_info,
+                          entity_priors=entity_priors)
     
     del ref_model
     torch.cuda.empty_cache()
@@ -211,6 +212,14 @@ def main():
     g.add_argument("--device", default="cuda:0")
     g.add_argument("--max_length", type=int, default=128)
     g.add_argument("--exp_name", default=None, help="Override auto experiment name")
+    g.add_argument("--fold", type=int, default=None,
+                   help="K-Fold CV fold index (None = legacy seed split)")
+    g.add_argument("--folds_root", default="./dataset/folds",
+                   help="Root for pre-generated fold splits")
+    g.add_argument("--normalize_prior", action="store_true", default=False,
+                   help="Use PMI normalization in evaluation")
+    g.add_argument("--priors_root", default="./dataset/priors",
+                   help="Root for pre-generated entity priors")
     
     # ---- BiasEdit ----
     g = parser.add_argument_group("BiasEdit")
@@ -262,12 +271,33 @@ def main():
     LOG.info(f"COCOA Baseline: {args.method}")
     LOG.info(f"  culture={args.culture}, lang={args.lang}, "
              f"model={args.model}, seed={args.seed}")
+    if args.fold is not None:
+        LOG.info(f"  fold={args.fold}, folds_root={args.folds_root}")
+    if args.normalize_prior:
+        LOG.info(f"  PMI eval enabled, priors_root={args.priors_root}")
     LOG.info("=" * 60)
     
-    data, split_info = load_and_split(
-        data_root=args.data_root, culture=args.culture,
-        lang=args.lang, seed=args.seed,
-    )
+    # Load data: K-Fold (if --fold) or legacy seed split
+    if args.fold is not None:
+        data, split_info = load_and_split_kfold(
+            data_root=args.data_root, culture=args.culture,
+            lang=args.lang, seed=args.seed, fold=args.fold,
+            folds_root=args.folds_root,
+        )
+    else:
+        data, split_info = load_and_split(
+            data_root=args.data_root, culture=args.culture,
+            lang=args.lang, seed=args.seed,
+        )
+    
+    # Load entity priors for PMI evaluation
+    entity_priors = None
+    if args.normalize_prior:
+        from src.prior_utils import load_entity_priors
+        entity_priors = load_entity_priors(
+            args.priors_root, args.model, args.culture, args.lang
+        )
+        LOG.info(f"  Loaded {len(entity_priors)} entity priors for PMI eval")
     
     # =========================================================================
     # 2. Experiment name
@@ -286,6 +316,11 @@ def main():
                 args.unlearn_ster_weight, args.unlearn_anti_weight,
                 args.unlearn_kl_weight, args.unlearn_lora_r, args.unlearn_max_steps,
             )
+        # Append fold and PMI info
+        if args.fold is not None:
+            exp_name += f"_fold{args.fold}"
+        if args.normalize_prior:
+            exp_name += "_pmi"
     else:
         exp_name = args.exp_name
     
@@ -313,9 +348,9 @@ def main():
     # 4. Train
     # =========================================================================
     if args.method == "biasedit":
-        results, config = run_biasedit(args, split_info)
+        results, config = run_biasedit(args, split_info, entity_priors)
     else:
-        results, config = run_biasunlearn(args, split_info)
+        results, config = run_biasunlearn(args, split_info, entity_priors)
     
     # =========================================================================
     # 5. Save final results

@@ -70,8 +70,9 @@ MODEL_SHORTCUTS = {
     "llama3_8b_instruct": "meta-llama/Llama-3.1-8B-Instruct",
     "qwen25_7b": "Qwen/Qwen2.5-7B",
     "qwen3_8b": "Qwen/Qwen3-8B",
-    "gemma3_12b": "google/gemma-2-9b",
-    "gemma3_12b_it": "google/gemma-2-9b-it",
+    "gemma3_12b": "google/gemma-3-12b-pt",
+    "gemma3_12b_it": "google/gemma-3-12b-it",
+    "aya_8b": "CohereForAI/aya-expanse-8b",
     "gpt_oss_20b": "EleutherAI/gpt-neox-20b",
 }
 
@@ -81,8 +82,9 @@ MODEL_NUM_LAYERS = {
     "meta-llama/Llama-3.1-8B-Instruct": 32,
     "Qwen/Qwen2.5-7B": 28,
     "Qwen/Qwen3-8B": 36,
-    "google/gemma-2-9b": 42,
-    "google/gemma-2-9b-it": 42,
+    "google/gemma-3-12b-pt": 48,
+    "google/gemma-3-12b-it": 48,
+    "CohereForAI/aya-expanse-8b": 32,
 }
 
 
@@ -196,13 +198,22 @@ def get_target_modules(config: ModelConfig, model_name: str) -> List[str]:
     # Determine architecture
     is_llama = "llama" in model_name.lower()
     is_qwen = "qwen" in model_name.lower()
-    is_gemma = "gemma" in model_name.lower()
+    is_gemma3 = "gemma-3" in model_name.lower() or "gemma3" in model_name.lower()
+    is_gemma = "gemma" in model_name.lower() and not is_gemma3
+    is_cohere = "cohere" in model_name.lower() or "aya" in model_name.lower()
     
     # Define module names per architecture
-    if is_llama or is_qwen:
+    if is_llama or is_qwen or is_cohere:
         attn_modules = ["q_proj", "k_proj", "v_proj", "o_proj"]
         mlp_modules = ["gate_proj", "up_proj", "down_proj"]
         layer_prefix = "model.layers"
+        attn_prefix = "self_attn"
+        mlp_prefix = "mlp"
+    elif is_gemma3:
+        # Gemma 3 is multimodal — text layers under language_model
+        attn_modules = ["q_proj", "k_proj", "v_proj", "o_proj"]
+        mlp_modules = ["gate_proj", "up_proj", "down_proj"]
+        layer_prefix = "model.language_model.layers"
         attn_prefix = "self_attn"
         mlp_prefix = "mlp"
     elif is_gemma:

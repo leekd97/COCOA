@@ -87,6 +87,9 @@ def parse_args():
     p.add_argument("--pairing", type=str, default="1to1",
                    choices=["1to1", "nxn", "nxm"],
                    help="Entity pairing: 1to1 (default), nxn (equal-sided all combos), nxm (all combos)")
+    p.add_argument("--bilingual", action="store_true", default=False,
+                   help="Train with both cu (monolingual) and en (English) data. "
+                        "Doubles training data. Eval remains cu only.")
     
     # ==========================================================================
     # Experiment Organization
@@ -168,6 +171,9 @@ def parse_args():
                    help="Scale for MSE/Huber neutral loss")
     p.add_argument("--huber_delta", type=float, default=5.0,
                    help="Delta for Huber neutral loss")
+    p.add_argument("--w_drift", type=float, default=0.0,
+                   help="Neutral drift regularization weight (0=off). "
+                        "Penalizes neutral gap diverging from base model.")
     
     # ==========================================================================
     # Gradient Method
@@ -261,6 +267,10 @@ def build_exp_name(args) -> str:
     if hasattr(args, "pairing") and args.pairing != "1to1":
         parts.append(args.pairing)
     
+    # Bilingual training
+    if hasattr(args, "bilingual") and args.bilingual:
+        parts.append("bilingual")
+    
     # Fold (if using K-Fold CV)
     if hasattr(args, "fold") and args.fold is not None:
         parts.append(f"fold{args.fold}")
@@ -290,13 +300,25 @@ def main():
     print("\n[1/4] Loading data...")
     data = load_camellia_data(args.data_root, culture=args.culture, target_lang=args.lang)
     
+    # Load English data too if bilingual
+    data_en = None
+    if args.bilingual:
+        print("  [Bilingual] Loading English data...")
+        data_en = load_camellia_data(args.data_root, culture=args.culture, target_lang="en")
+    
     if args.fold is not None:
         # ---- K-Fold CV: load pre-generated split ----
         from src.fold_utils import load_fold, create_examples_from_fold
         print(f"  Loading fold {args.fold} from {args.folds_root}/seed{args.seed}")
         split_info = load_fold(args.folds_root, args.culture, args.lang, args.fold, args.seed)
         
-        # Create example lists for evaluation (legacy compat)
+        # Load English fold if bilingual
+        split_info_en = None
+        if args.bilingual:
+            print(f"  [Bilingual] Loading English fold {args.fold}")
+            split_info_en = load_fold(args.folds_root, args.culture, "en", args.fold, args.seed)
+        
+        # Create example lists for evaluation (cu only — primary metric)
         val_examples = create_examples_from_fold(
             split_info, args.culture, args.lang, "val", args.max_pairs
         )
@@ -311,7 +333,12 @@ def main():
             ents = split_info[f"{sn}_entities"]
             na = sum(len(v["asian"]) for v in ents.values())
             nw = sum(len(v["western"]) for v in ents.values())
-            print(f"  {sn}: {ng}G + {nn}N contexts, {na}A + {nw}W entities")
+            print(f"  {sn} (cu): {ng}G + {nn}N contexts, {na}A + {nw}W entities")
+        
+        if args.bilingual and split_info_en:
+            ng_en = len(split_info_en["grounded_train"])
+            nn_en = len(split_info_en["neutral_train"])
+            print(f"  train (en): {ng_en}G + {nn_en}N contexts")
     else:
         # ---- Legacy: seed-based random split ----
         train_examples, val_examples, test_examples, split_info = split_data(
@@ -354,16 +381,47 @@ def main():
     # 3. Create Paired DataLoader
     # =========================================================================
     print("\n[3/4] Creating paired dataloader...")
-    train_dataloader = create_paired_dataloader(
-        grounded_df=split_info["grounded_train"],
-        neutral_df=split_info["neutral_train"],
-        entities=split_info["train_entities"],
-        tokenizer=tokenizer,
-        pairs_per_batch=args.pairs_per_batch,
-        pairs_per_category=args.pairs_per_category,
-        seed=args.seed,
-        pairing=args.pairing,
-    )
+    
+    if args.bilingual and split_info_en is not None:
+        # Build category_data separately for each language, then merge
+        from src.data import build_category_data
+        cat_cu = build_category_data(
+            split_info["grounded_train"], split_info["neutral_train"],
+            split_info["train_entities"]
+        )
+        cat_en = build_category_data(
+            split_info_en["grounded_train"], split_info_en["neutral_train"],
+            split_info_en["train_entities"]
+        )
+        # Merge with lang-tagged keys (ensures context-entity language match)
+        merged_cat = {}
+        for k, v in cat_cu.items():
+            merged_cat[f"{k}_cu"] = v
+        for k, v in cat_en.items():
+            merged_cat[f"{k}_en"] = v
+        
+        print(f"  [Bilingual] Merged: {len(cat_cu)} cu + {len(cat_en)} en = {len(merged_cat)} categories")
+        
+        train_dataloader = create_paired_dataloader(
+            grounded_df=None, neutral_df=None, entities=None,
+            tokenizer=tokenizer,
+            pairs_per_batch=args.pairs_per_batch,
+            pairs_per_category=args.pairs_per_category,
+            seed=args.seed,
+            pairing=args.pairing,
+            category_data_override=merged_cat,
+        )
+    else:
+        train_dataloader = create_paired_dataloader(
+            grounded_df=split_info["grounded_train"],
+            neutral_df=split_info["neutral_train"],
+            entities=split_info["train_entities"],
+            tokenizer=tokenizer,
+            pairs_per_batch=args.pairs_per_batch,
+            pairs_per_category=args.pairs_per_category,
+            seed=args.seed,
+            pairing=args.pairing,
+        )
     
     # =========================================================================
     # 4. Load Entity Priors (if requested)
@@ -374,12 +432,22 @@ def main():
         entity_priors = load_entity_priors(
             args.priors_root, args.model, args.culture, args.lang
         )
+        # Load English priors too if bilingual
+        if args.bilingual:
+            en_priors = load_entity_priors(
+                args.priors_root, args.model, args.culture, "en"
+            )
+            entity_priors.update(en_priors)
+            print(f"  Prior norm (bilingual): {len(entity_priors)} entities (cu+en), "
+                  f"α_g={args.prior_alpha_g}, α_n={args.prior_alpha_n}")
+        else:
+            print(f"  Prior norm: {len(entity_priors)} entities, "
+                  f"α_g={args.prior_alpha_g}, α_n={args.prior_alpha_n}")
         prior_config = {
             "priors": entity_priors,
             "alpha_g": args.prior_alpha_g,
             "alpha_n": args.prior_alpha_n,
         }
-        print(f"  Prior norm: {len(entity_priors)} entities, α_g={args.prior_alpha_g}, α_n={args.prior_alpha_n}")
     
     # =========================================================================
     # 5. Train
@@ -409,6 +477,7 @@ def main():
         npo_min_weight=args.npo_min_weight,
         mse_scale=args.mse_scale,
         huber_delta=args.huber_delta,
+        w_drift=args.w_drift,
         
         gradient_method=args.gradient_method,
         cbs_ema_alpha=args.cbs_ema_alpha,
